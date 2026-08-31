@@ -270,6 +270,10 @@ nav{
     gap: 1rem;
 }
 
+.home__emoji{
+    transform: scaleX(-1) translateY(-13px)
+}
+
 .home__content{
     grid-template-columns: .5fr 3fr;
     padding-top: 3.5rem;
@@ -371,13 +375,82 @@ nav{
 .button--flex{
     display: inline-flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 /*==================== ABOUT ====================*/
-.about__img{
-    width: 200px;
+.about__img-wrapper{
+    position: relative;
+    width: 220px;
+    aspect-ratio: 9 / 16;
     border-radius: .5rem;
     justify-self: center;
-    align-self: center ;
+    align-self: center;
+    cursor: pointer;
+
+    cursor: url('https://cdn.custom-cursor.com/db/7647/32/meme-pop-cat-pointer.png') 32 32, auto;
+  /* cursor: url('	https://64.media.tumblr.com/4d40efa93e8cfe522fff1d81c311f49f/tumblr_mj4eheib8x1s3bc1no1_500.gifv') 32 32, auto !important; */
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--first-color-second);
+    /* Tells children elements to respect the 3D space */
+    transform-style: preserve-3d;   
+    /* Smooth return transition when cursor leaves */
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+    /* The Interactive Card */
+
+}
+
+.about__img,
+.about__video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: .5rem;
+    display: block;
+    transition: transform .3s ease;
+}
+
+.about__video{
+    display: none;
+    outline: none;
+}
+
+.about__video::-webkit-media-controls {
+    display: none !important;
+}
+
+.about__img-wrapper:hover .about__img{
+    transform: scale(1.03);
+}
+
+.about__play-btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background-color: var(--first-color);
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    transition: .3s ease;
+    pointer-events: none;
+    display: none;
+}
+
+.about__img-wrapper:hover .about__play-btn{
+    background-color: var(--first-color-alt);
+    transform: translate(-50%, -50%) scale(1.12);
 }
 
 .about__description{
@@ -404,7 +477,7 @@ nav{
 .about__info-title,
 .about__info-name{
     display: block;
-    text-align: center;
+    text-align: left;
 }
 
 .about__buttons{
@@ -579,6 +652,82 @@ nav{
 .skills__angular{
     width: 60%;
 }
+.skills__nextjs{
+    width: 85%;
+}
+
+.skills__materialui{
+    width: 85%;
+}
+
+.skills__tanstack{
+    width: 80%;
+}
+
+.skills__threejs{
+    width: 75%;
+}
+
+.skills__webgl{
+    width: 70%;
+}
+
+.skills__weboptimization{
+    width: 90%;
+}
+
+.skills__scss{
+    width: 85%;
+}
+
+.skills__graphql{
+    width: 75%;
+}
+
+.skills__azure{
+    width: 80%;
+}
+
+.skills__azureadb2c{
+    width: 85%;
+}
+
+.skills__entraid{
+    width: 80%;
+}
+
+.skills__fhir{
+    width: 75%;
+}
+
+.skills__dicom{
+    width: 75%;
+}
+
+.skills__jest{
+    width: 85%;
+}
+
+.skills__cypress{
+    width: 80%;
+}
+
+.skills__playwright{
+    width: 80%;
+}
+
+.skills__sonarcloud{
+    width: 75%;
+}
+
+.skills__strapi{
+    width: 85%;
+}
+
+.skills__datadog{
+    width: 80%;
+}
+
 .skills__close .skills__list{
     height: 0;
     overflow: hidden;
@@ -844,10 +993,43 @@ nav{
     padding: .5rem .5rem .5rem 0;
     resize: none;
 }
-.button.button--flex{
+
+.contact__button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    margin-top: var(--mb-1);
     width: 100%;
-    margin-top: 10%;
 }
+
+.contact__button:disabled{
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.contact__message{
+    font-size: var(--small-font-size);
+    margin-top: var(--mb-1);
+    text-align: center;
+    display: none;
+    font-weight: var(--font-medium);
+}
+
+.contact__message.success{
+    display: block;
+    color: #27ae60;
+}
+
+.contact__message.error{
+    display: block;
+    color: #e74c3c;
+}
+
+.contact__message.sending{
+    display: block;
+    color: var(--first-color);
+}
+
 /*==================== FOOTER ====================*/
 .footer{
     padding-top: 2rem;
@@ -1123,8 +1305,8 @@ nav{
     .about__container{
         column-gap: 5rem;
     }
-    .about__img{
-        width: 350px;
+    .about__img-wrapper{
+        width: 320px;
     }
     .about__description{
         text-align: initial;
@@ -1178,8 +1360,8 @@ nav{
     .home__social{
         transform: translateX(-6rem);
     }
-    .about__img{
-        width: 400px;
+    .about__img-wrapper{
+        width: 350px;
     }
     .portfolio__content{
         column-gap: 5rem;

@@ -166,3 +166,111 @@ themeButton.addEventListener('click', () => {
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+/*==================== CONTACT FORM SUBMISSION (FIREBASE) ====================*/
+const FIREBASE_DB_URL = 'https://porfolio-contact-form-ddf3a-default-rtdb.asia-southeast1.firebasedatabase.app/submissions.json';
+
+const contactForm = document.getElementById('contact-form');
+const contactButton = document.getElementById('contact-button');
+const contactStatus = document.getElementById('contact-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('contact-name');
+        const emailInput = document.getElementById('contact-email');
+        const messageInput = document.getElementById('contact-message-input');
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const message = messageInput ? messageInput.value.trim() : '';
+
+        if (!name || !email || !message) {
+            contactStatus.className = 'contact__message error';
+            contactStatus.textContent = 'Please fill in all required fields.';
+            return;
+        }
+
+        // Show loading / sending feedback
+        const originalButtonHtml = contactButton.innerHTML;
+        contactButton.disabled = true;
+        contactButton.innerHTML = 'Sending... <i class="uil uil-spinner button__icon"></i>';
+        contactStatus.className = 'contact__message sending';
+        contactStatus.textContent = 'Sending your message...';
+
+        const payload = {
+            name: name,
+            email: email,
+            message: message,
+            timestamp: Date.now()
+        };
+
+        try {
+            const response = await fetch(FIREBASE_DB_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.error || 'Failed to submit form to Firebase');
+            }
+
+            contactStatus.className = 'contact__message success';
+            contactStatus.textContent = 'Thank you! Your message has been sent successfully.';
+            contactForm.reset();
+            setTimeout(() => {
+                contactStatus.textContent = '';
+                contactStatus.className = 'contact__message';
+            }, 6000);
+        } catch (error) {
+            console.error('Contact form submission error:', error);
+            contactStatus.className = 'contact__message error';
+            contactStatus.textContent = 'Something went wrong. Please try again or reach out directly via email.';
+        } finally {
+            contactButton.disabled = false;
+            contactButton.innerHTML = originalButtonHtml;
+        }
+    });
+}
+
+
+/*==================== ABOUT VIDEO PLAY ON CLICK ====================*/
+const aboutMediaWrapper = document.getElementById('about-media-wrapper');
+const aboutImg = document.getElementById('about-img');
+const aboutPlayBtn = document.getElementById('about-play-btn');
+const aboutVideo = document.getElementById('about-video');
+
+if (aboutMediaWrapper && aboutVideo) {
+    const showImage = () => {
+        aboutVideo.pause();
+        aboutVideo.currentTime = 0;
+        aboutVideo.style.display = 'none';
+        if (aboutImg) aboutImg.style.display = 'block';
+        if (aboutPlayBtn) aboutPlayBtn.style.display = 'none';
+    };
+
+    const playAboutVideo = () => {
+        if (aboutImg) aboutImg.style.display = 'none';
+        if (aboutPlayBtn) aboutPlayBtn.style.display = 'none';
+        aboutVideo.style.display = 'block';
+        aboutVideo.play().catch(err => {
+            console.log('Video play error:', err);
+        });
+    };
+
+    aboutMediaWrapper.addEventListener('click', () => {
+        if (aboutVideo.style.display === 'block') {
+            showImage();
+        } else {
+            playAboutVideo();
+        }
+    });
+
+    // When the video ends, seamlessly return to displaying the image
+    aboutVideo.addEventListener('ended', showImage);
+}
