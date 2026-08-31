@@ -388,7 +388,7 @@ nav{
     align-self: center;
     cursor: pointer;
 
-    cursor: url('https://cdn.custom-cursor.com/db/7647/32/meme-pop-cat-pointer.png') 32 32, auto;
+    cursor: url('../assets/img/meme-pop-cat-pointer.png') 32 32, auto;
   /* cursor: url('	https://64.media.tumblr.com/4d40efa93e8cfe522fff1d81c311f49f/tumblr_mj4eheib8x1s3bc1no1_500.gifv') 32 32, auto !important; */
 
     overflow: hidden;
@@ -1152,6 +1152,10 @@ nav{
         margin-right: var(--mb-1);
     }
 
+    .home__emoji{
+        display: none;
+    }
+
     .nav__menu{
         padding: 2rem .25rem 4rem;
     }
@@ -1197,6 +1201,11 @@ nav{
     .home__content{
         grid-template-columns: max-content 1fr 1fr;
     }
+
+    .home__emoji{
+        display: none;
+    }
+
     .home__data{
         grid-column: initial;
     }
@@ -1241,6 +1250,10 @@ nav{
     }
     body{
         margin: 0;
+    }
+
+    .home__emoji{
+        display: block;
     }
 
     .section{
@@ -1354,6 +1367,7 @@ nav{
     .footer__container{
         padding: 0;
     }
+
     .home__blob{
         width: 320px;
     }
