@@ -1,6 +1,6 @@
 /*==================== UI SOUNDS ====================
    Tiny synthesised sounds (Web Audio, no audio files).
-   - window.siteSound.play(name)   name: tick | soft | toggle-on | toggle-off | whoosh | freeze | unfreeze | bang | chime
+   - window.siteSound.play(name)   name: tick | soft | toggle-on | toggle-off
    - A sound on/off button (#sound-button) persists the choice in localStorage.
    - Subtle click sounds are attached to buttons and links across the site.
 =====================================================*/
@@ -72,21 +72,6 @@
         },
         'toggle-on': (c) => { tone(c, { from: 620, dur: 0.06, vol: 0.04 }); tone(c, { from: 930, dur: 0.08, vol: 0.04, at: 0.06 }); },
         'toggle-off': (c) => { tone(c, { from: 930, dur: 0.06, vol: 0.04 }); tone(c, { from: 620, dur: 0.08, vol: 0.04, at: 0.06 }); },
-        whoosh: (c) => noise(c, { dur: 0.22, vol: 0.12, filter: 'bandpass', f0: 600, f1: 3200, q: 1.2 }),
-        freeze: (c) => {
-            tone(c, { type: 'sine', from: 1800, to: 1200, dur: 0.18, vol: 0.05 });
-            tone(c, { type: 'sine', from: 2400, to: 1600, dur: 0.22, vol: 0.03, at: 0.04 });
-            noise(c, { dur: 0.12, vol: 0.04, filter: 'highpass', f0: 5000, f1: 7000 });
-        },
-        unfreeze: (c) => tone(c, { type: 'triangle', from: 500, to: 900, dur: 0.12, vol: 0.045 }),
-        bang: (c) => {
-            tone(c, { type: 'sine', from: 140, to: 40, dur: 0.45, vol: 0.5 });          // thump
-            noise(c, { dur: 0.5, vol: 0.55, f0: 4000, f1: 120 });                         // blast
-            for (let i = 0; i < 26; i++) {                                                 // crackle
-                noise(c, { dur: 0.03 + Math.random() * 0.03, vol: 0.06 + Math.random() * 0.12, at: 0.12 + Math.random() * 0.9, filter: 'bandpass', f0: 2000 + Math.random() * 5000, f1: 1500, q: 2 });
-            }
-        },
-        chime: (c) => [784, 988, 1175, 1568].forEach((f, i) => tone(c, { type: 'sine', from: f, dur: 0.35, vol: 0.035, at: 0.25 + i * 0.07 })),
     };
 
     const play = (name) => {
@@ -117,7 +102,7 @@
     const TICK = '.button, .pill, .nav__link, .link-arrow, .count-chip, .hero__social a, .footer__socials a, .footer__links a, .cert, .work, .post, .post-feature, .blog-banner, .cta__link, .cta__copy, .rec__link, .scrollup, .footer__replay';
     document.addEventListener('click', (e) => {
         const t = e.target.closest?.(`${SOFT}, ${TICK}`);
-        if (!t || t.id === 'sound-button' || t.closest('.dc, .dc-ctrl')) return;
+        if (!t || t.id === 'sound-button') return;
         play(t.matches(SOFT) ? 'soft' : 'tick');
     }, true);
 
