@@ -4,1504 +4,941 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sashank Deb · Senior Software Engineer</title>
+    <meta name="description" content="Sashank Deb is a senior software engineer in Bengaluru who sits at the intersection of product engineering and technical leadership. React, Next.js, TypeScript.">
+    <meta property="og:title" content="Sashank Deb · Senior Software Engineer">
+    <meta property="og:description" content="Product engineering and technical leadership. React, Next.js, TypeScript, auth and web performance.">
+    <meta property="og:image" content="https://sashank-deb.github.io/Profile/assets/img/headshot.png">
+    <meta name="theme-color" content="#161415">
+    <link rel="icon" href="assets/img/Vector.svg" type="image/svg+xml">
+    <link rel="preload" as="image" href="assets/img/headshot.png" type="image/png" fetchpriority="high">
 
-    <!--==================== UNICONS ====================-->
+    <script>
+        document.documentElement.classList.add('js');
+        try {
+            const t = localStorage.getItem('selected-theme');
+            if (t !== 'light') document.documentElement.classList.add('dark-theme');
+        } catch (e) {}
+    </script>
+
+    <script>
+        // Decide before paint whether the name intro plays, so it never flashes in late.
+        (function () {
+            var d = document.documentElement;
+            try {
+                var nav = performance.getEntriesByType('navigation')[0];
+                var replay = /[?&]intro=replay/.test(location.search);
+                var seen = true;
+                try { seen = localStorage.getItem('introSeen') === '1'; } catch (e) {}
+                var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var resumed = (nav && (nav.type === 'reload' || nav.type === 'back_forward')) || Boolean(location.hash);
+                var mode = replay || (!seen && !location.hash) ? 'play' : (reduced || resumed ? 'none' : 'skip');
+                d.setAttribute('data-intro', mode);
+                if (mode === 'play') setTimeout(function () { if (!window.__opPlaying) d.removeAttribute('data-intro'); }, 2500);
+            } catch (e) { d.removeAttribute('data-intro'); }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Jost:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
-    <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
-
-    <!--==================== SWIPER CSS ====================-->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-
-    <!--==================== CSS ====================-->
     <link rel="stylesheet" href="assets/css/styles.css">
-
-    <title>Sashank Deb - Software Developer</title>
-    <link rel="icon" href="assets/img/Vector.svg" type="image/icon type">
 </head>
 
 <body>
+    <!--==================== NAME INTRO (first visit) ====================-->
+    <div class="op" data-opener hidden>
+        <div class="op__pre" aria-hidden="true">
+            <div class="op__pre-mark">S<span>.</span></div>
+            <div class="op__pre-band"><span class="op__pre-red"></span><span class="op__pre-mustard"></span></div>
+        </div>
+        <div class="op__cut op__s1" aria-hidden="true">
+            <div class="op__wipe"></div>
+            <div class="op__mark">S<span>.</span></div>
+        </div>
+        <div class="op__cut op__s2" aria-hidden="true">
+            <div class="op__crop">Sashank</div>
+        </div>
+        <div class="op__cut op__s3" aria-hidden="true">
+            <div class="op__stack">
+                <span class="op__off op__off--m">Deb</span>
+                <span class="op__off op__off--r">Deb</span>
+                <span class="op__word">Deb</span>
+            </div>
+        </div>
+        <button class="op__skip" type="button" data-op-skip>Skip intro <span class="op__esc">· Esc</span></button>
+    </div>
+
     <!--==================== HEADER ====================-->
     <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">Sashank Deb</a>
+        <nav class="nav container" aria-label="Main">
+            <a href="#home" class="nav__logo">Sashank Deb<span class="dot">.</span></a>
+
             <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list grid">
-                    <li class="nav_item">
-                        <a href="#home" class="nav__link active-link">
-                            <i class="uil uil-estate nav_icon"></i> Home
-                        </a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#about" class="nav__link">
-                            <i class="uil uil-user nav_icon"></i> About
-                        </a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#skills" class="nav__link">
-                            <i class="uil uil-file-alt nav_icon"></i> Skills
-                        </a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#portfolio" class="nav__link">
-                            <i class="uil uil-scenery nav_icon"></i> Portfolio
-                        </a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#videos" class="nav__link">
-                            <i class="uil uil-play nav_icon"></i> Projects
-                        </a>
-                    </li>
-                    <li class="nav_item">
-                        <a href="#contact" class="nav__link">
-                            <i class="uil uil-message nav_icon"></i> Contact
-                        </a>
-                    </li>
+                <ul class="nav__list">
+                    <li><a href="#about" class="nav__link"><i class="uil uil-user nav__icon"></i> About</a></li>
+                    <li><a href="#experience" class="nav__link"><i class="uil uil-briefcase-alt nav__icon"></i> Experience</a></li>
+                    <li><a href="#projects" class="nav__link"><i class="uil uil-scenery nav__icon"></i> Projects</a></li>
+                    <li><a href="#skills" class="nav__link"><i class="uil uil-file-alt nav__icon"></i> Skills</a></li>
+                    <li><a href="#writing" class="nav__link"><i class="uil uil-edit-alt nav__icon"></i> Writing</a></li>
+                    <li><a href="#contact" class="nav__link"><i class="uil uil-message nav__icon"></i> Contact</a></li>
                 </ul>
-                <i class="uil uil-times nav__close" id="nav-close"></i>
+                <button class="nav__close" id="nav-close" type="button" aria-label="Close menu"><i class="uil uil-times"></i></button>
             </div>
-            <div class="nav__btns">
-                <!-- Theme change button -->
-                <i class="uil uil-moon change-theme" id="theme-button"></i>
-                <div class="nav__toggle" id="nav-toggle">
+
+            <div class="nav__actions">
+                <button class="icon-btn" id="sound-button" type="button" aria-pressed="true" aria-label="Turn sound effects off">
+                    <i class="uil uil-volume sound-icon sound-icon--on"></i>
+                    <i class="uil uil-volume-mute sound-icon sound-icon--off"></i>
+                </button>
+                <button class="icon-btn" id="theme-button" type="button" aria-label="Toggle dark mode">
+                    <i class="uil uil-moon theme-icon theme-icon--moon"></i>
+                    <i class="uil uil-sun theme-icon theme-icon--sun"></i>
+                </button>
+
+                <a class="pill pill--nav" href="mailto:sashankdebrgu7@gmail.com?subject=Hi%20Sashank" aria-label="Email Sashank">
+                    <span class="pill__faces" aria-hidden="true">
+                        <img class="pill__avatar" src="assets/img/headshot.png" alt="" width="36" height="36">
+                        <span class="pill__gmail">
+                            <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M7 39h7V22L4 14.5V36a3 3 0 0 0 3 3z"/><path fill="#34A853" d="M34 39h7a3 3 0 0 0 3-3V14.5L34 22z"/><path fill="#FBBC04" d="M34 12v10l10-7.5v-3c0-3.7-4.2-5.8-7.2-3.6z"/><path fill="#EA4335" d="M14 22V12l10 7.5L34 12v10l-10 7.5z"/><path fill="#C5221F" d="M4 11.5v3L14 22V12l-2.8-2.1C8.2 7.7 4 9.8 4 11.5z"/></svg>
+                        </span>
+                    </span>
+                    <span class="pill__label">Contact</span>
+                </a>
+
+                <button class="icon-btn nav__toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
                     <i class="uil uil-apps"></i>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
 
-    <!--==================== MAIN ====================-->
     <main class="main">
         <!--==================== HOME ====================-->
-        <section class="home section" id="home">
-            <div class="home__container container grid">
-                <div class="home__content grid">
-                    <div class="home__social">
-                        <a href="https://www.linkedin.com/in/sashank-deb/" target="_blank" class="home__social-icon">
-                            <i class="uim uim-linkedin-alt"></i>
+        <section class="hero" id="home">
+            <div class="hero__container container">
+                <div class="hero__data">
+                    <p class="eyebrow" data-reveal>Senior Software Engineer &nbsp;/&nbsp; Bengaluru, India</p>
+                    <h1 class="hero__title" data-reveal>Hi, I'm Sashank<span class="dot">.</span></h1>
+
+                    <p class="home__description" data-reveal>
+                        I sit at the intersection of <strong>product engineering</strong> and <strong>technical leadership</strong>.
+                        The combination of technical depth paired with genuine care to ensure intuitive user experience is rare,
+                        and that's exactly what I bring to a team.
+                    </p>
+
+                    <div class="hero__buttons" data-reveal>
+                        <a href="#projects" class="button">
+                            See my work <i class="uil uil-arrow-down"></i>
                         </a>
-                        <a href="https://github.com/Sashank-Deb" target="_blank" class="home__social-icon">
-                            <i class="uim uim-github-alt"></i>
-                        </a>
-                        <a href="https://www.behance.net/sashankdeb1" target="_blank" class="home__social-icon">
-                            <i class="uil uil-behance"></i>
-                        </a>
-                    </div>
-                    <div class="home__img">
-                        <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <mask id="mask0" mask-type="alpha">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                            </mask>
-                            <g mask="url(#mask0)">
-                                <path d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                                    <image class="home__blob-img" x='10' y='0' xlink:href="assets/img/perfil.png" />
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="home__data">
-                        <h1 class="home__title">Hi, I'am Sashank</h1>
-                        <h3 class="home__subtitle">Senior Software Developer | UI/UX</h3>
-                        <p class="home__description">
-                            <span style="display: flex; align-items: center; gap: 10px;">
-                                <img src="./assets/img/meme-pop-cat-cursor.png" alt="Emoji" id="cursorEmoji" class="home__emoji">
-                                <span>
-                                    "Making the web less <span style="color: #919090; font-weight: bold;">meh</span>,</br>  one <span style="color: #ff6b6b; font-weight: bold;">pixel</span> at a time."
-                                    </br></br>
-                                </span>
+                        <a href="assets/pdf/Sashank_Deb_Resume.pdf" class="button button--ghost cv-btn" download="Sashank_Deb_Resume.pdf">
+                            <span class="cv-btn__icon" aria-hidden="true">
+                                <svg viewBox="0 0 32 40"><path d="M4 0h17l11 11v25a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" fill="#fff" stroke="#D9D4CD" stroke-width="1.2"/><path d="M21 0l11 11h-7a4 4 0 0 1-4-4z" fill="#D9D4CD"/><rect x="-1" y="19" width="27" height="12.5" rx="2.5" fill="#E5322D"/><text x="12.5" y="28.6" font-size="8.6" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif">PDF</text></svg>
                             </span>
-                            I design software that solves complex 
-                            business challenges while delivering intuitive, high-performance user
-                            experiences. I specialize in frontend architecture, application security, performance optimization.
-                            Building reliable products that scale across real-world use cases.</p>
-                        <a href="#contact" class="button button--flex">
-                            Contact Me <i class="uil uil-message button__icon"></i>
+                            <span>Download CV</span> <i class="uil uil-download-alt"></i>
                         </a>
+                    </div>
+
+                    <div class="hero__social" data-reveal>
+                        <a href="https://www.linkedin.com/in/sashank-deb/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="uil uil-linkedin"></i></a>
+                        <a href="https://github.com/Sashank-Deb" target="_blank" rel="noopener" aria-label="GitHub"><i class="uil uil-github"></i></a>
+                        <a href="https://www.behance.net/sashankdeb1" target="_blank" rel="noopener" aria-label="Behance"><i class="uil uil-behance"></i></a>
                     </div>
                 </div>
-                <div class="home__scroll">
-                    <a href="#about" class="home__scroll-button button--flex">
-                        <i class="uil uil-mouse-alt home__scroll-mouse"></i>
-                        <span class="home__scroll-name">
-                            Scroll down
-                        </span>
-                        <i class="uil uil-arrow-down home__scroll-arrow"></i>
-                    </a>
+
+                <div class="portrait" data-reveal>
+                    <span class="portrait__blob portrait__blob--back" aria-hidden="true"></span>
+                    <span class="portrait__blob portrait__blob--ring" aria-hidden="true"></span>
+                    <div class="portrait__frame">
+                        <img src="assets/img/headshot.png" alt="Sashank Deb" width="1172" height="1395" fetchpriority="high" decoding="async">
+                    </div>
+                    <span class="portrait__dot portrait__dot--a" aria-hidden="true"></span>
+                    <span class="portrait__dot portrait__dot--b" aria-hidden="true"></span>
+                    <span class="portrait__tag">
+                        <span class="portrait__tag-dot"></span> 5+ years shipping
+                    </span>
+                </div>
+            </div>
+
+            <div class="hero__stats container" data-reveal>
+                <div class="stat">
+                    <span class="stat__value">3.8s <i class="uil uil-arrow-right"></i> &lt;0.8s</span>
+                    <span class="stat__label">LCP, after the performance work I led</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__value">50+</span>
+                    <span class="stat__label">Clients on the radiology platform whose auth I owned</span>
+                </div>
+                <div class="stat">
+                    <span class="stat__value">&minus;30%</span>
+                    <span class="stat__label">Auth support tickets after the PIN-to-password migration</span>
                 </div>
             </div>
         </section>
 
         <!--==================== ABOUT ====================-->
-        <section class="about section" id="about">
-            <h2 class="section__title">
-                About Me
-            </h2>
-            <span class="section__subtitle">My introduction</span>
-
-            <div class="about__container container grid">
-                <div class="about__img-wrapper" id="about-media-wrapper">
-                    <div class="about__card-inner" id="about-card-inner">
-                        <img src="assets/img/about.PNG" alt="Sashank Deb" class="about__img" id="about-img">
-                        <div class="about__play-btn" id="about-play-btn" title="Click to play video">
-                            <i class="uil uil-play"></i>
-                        </div>
-                        <video id="about-video" class="about__video" src="assets/img/About.mp4" preload="metadata" playsinline></video>
-                        <div class="about__glare" id="about-glare"></div>
-                    </div>
+        <section class="section about" id="about">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <p class="eyebrow">01 &nbsp;/&nbsp; About</p>
+                    <h2 class="section__title">A little about me<span class="dot">.</span></h2>
                 </div>
-                <div class="about__data">
-                    <p class="about__description">
-                        I am a Senior Software Engineer with 5+ years of experience building scalable, secure, and high-performance web applications across healthcare SaaS, e-commerce, and EV technology. 
-                        I specialize in React, Next.js, TypeScript, JavaScript, REST/GraphQL APIs, cloud identity, application security, observability, and automated testing, with experience owning features end-to-end in multi-tenant platforms.
-                        My job entails creating and implementing User interfaces.
-                        <span style="font-weight: bold; color: white; "> I also happen to have won the Bajaj Finserv's Hack RX'21 </span>, a national level hackathon.
-                        I'd be delighted to assist you in building applications ground up.
-                    </p>
-                    <div class="about__info">
-                        <div>
-                            <span class="about__info-title">5+</span>
-                            <span class="about__info-name">Years <br> experience</span>
-                        </div>
-                        <div>
-                            <span class="about__info-title">20+</span>
-                            <span class="about__info-name">Completed <br> project</span>
-                        </div>
-                        <div>
-                            <span class="about__info-title">3+</span>
-                            <span class="about__info-name">Companies <br> worked</span>
-                        </div>
-                    </div>
-                    <div class="about__buttons">
-                        <a download="" href="assets/pdf/SASHANK DEB CV.pdf" target="_blank"
-                            class="button button--flex">
-                            Download CV <i class="uil uil-download-alt button__icon"></i>
-                        </a>
 
+                <div class="about__container">
+                    <div class="about__img-wrapper" id="about-media-wrapper" data-reveal title="Click to play">
+                        <img src="assets/img/about.webp" alt="Sashank Deb" class="about__img" id="about-img" loading="lazy">
+                        <video id="about-video" class="about__video" src="assets/img/About.mp4" preload="none" playsinline></video>
+                        <span class="about__hint"><i class="uil uil-play"></i> Play</span>
+                    </div>
+
+                    <div class="about__data" data-reveal>
+                        <p class="about__description">
+                            I'm a senior software engineer with 5+ years of building and scaling user-focused products
+                            across healthcare SaaS, e-commerce and EV technology. Most recently at RamSoft, I owned
+                            authentication for a multi-tenant radiology platform serving 50+ clients with zero downtime,
+                            and led the performance work that took LCP from 3.8&nbsp;s to under 800&nbsp;ms.
+                        </p>
+                        <p class="about__description">
+                            Outside work I build things for fun and in public: the open-source npm library
+                            <a href="https://react-liquid-fill.com/" target="_blank" rel="noopener">react-liquid-fill</a> and the AI mind-mapping app
+                            <a href="https://noodl.tech/" target="_blank" rel="noopener">noodl</a>. I also happen to have won Bajaj Finserv's HackRx'21.
+                        </p>
+
+                        <div class="about__info">
+                            <div>
+                                <span class="about__info-title">5+</span>
+                                <span class="about__info-name">Years of experience</span>
+                            </div>
+                            <div>
+                                <span class="about__info-title">20+</span>
+                                <span class="about__info-name">Projects shipped</span>
+                            </div>
+                            <div>
+                                <span class="about__info-title">3</span>
+                                <span class="about__info-name">Companies</span>
+                            </div>
+                        </div>
+
+                        <a href="assets/pdf/Sashank_Deb_Resume.pdf" class="button cv-btn" download="Sashank_Deb_Resume.pdf">
+                            <span class="cv-btn__icon" aria-hidden="true">
+                                <svg viewBox="0 0 32 40"><path d="M4 0h17l11 11v25a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z" fill="#fff" stroke="#D9D4CD" stroke-width="1.2"/><path d="M21 0l11 11h-7a4 4 0 0 1-4-4z" fill="#D9D4CD"/><rect x="-1" y="19" width="27" height="12.5" rx="2.5" fill="#E5322D"/><text x="12.5" y="28.6" font-size="8.6" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif">PDF</text></svg>
+                            </span>
+                            <span>Download CV</span> <i class="uil uil-download-alt"></i>
+                        </a>
                     </div>
                 </div>
             </div>
+        </section>
 
+        <!--==================== EXPERIENCE ====================-->
+        <section class="section experience" id="experience">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <p class="eyebrow">02 &nbsp;/&nbsp; Experience</p>
+                    <h2 class="section__title">Where I've worked<span class="dot">.</span></h2>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Qualification" data-reveal>
+                    <button class="tabs__btn is-active" role="tab" aria-selected="true" aria-controls="work" id="tab-work" data-target="#work">
+                        <i class="uil uil-briefcase-alt"></i> Work
+                    </button>
+                    <button class="tabs__btn" role="tab" aria-selected="false" aria-controls="education" id="tab-education" data-target="#education" tabindex="-1">
+                        <i class="uil uil-graduation-cap"></i> Education
+                    </button>
+                    <button class="tabs__btn" role="tab" aria-selected="false" aria-controls="achievements" id="tab-achievements" data-target="#achievements" tabindex="-1">
+                        <i class="uil uil-trophy"></i> Achievements
+                    </button>
+                    <span class="tabs__indicator" aria-hidden="true"></span>
+                </div>
+
+                <!-- Work -->
+                <div class="tabs__panel is-active" id="work" role="tabpanel" aria-labelledby="tab-work">
+                    <article class="job" data-reveal>
+                        <div class="job__meta">
+                            <span class="job__date">Apr 2023 – Aug 2026</span>
+                            <span class="job__place">Remote</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">Senior Software Engineer</h3>
+                            <p class="job__company">RamSoft Inc. <span>· Healthcare SaaS / Radiology Platform</span></p>
+                            <ul class="job__points">
+                                <li>Led a feature-flagged PIN-to-password migration on React and Azure AD B2C, cutting auth tickets by 30%. Added OTP rate limiting, origin validation and a 300&nbsp;s code expiry, saving an estimated $500–$2K in monthly abuse.</li>
+                                <li>Launched an AI-driven SSO onboarding flow that completes setup in under 3 hours; integrated OpenReplay and Datadog for production tracing.</li>
+                                <li>Engineered Workflow Automation tooling with a custom serialized-state <code>useUndoRedo</code> React hook, enabling a drag-and-drop tree UI that manages 500+ complex rule sets.</li>
+                                <li>Automated release regression testing with end-to-end suites, saving 2 hours of manual QA per release; shipped a HIPAA-compliant audit trail with full Jest and Storybook coverage.</li>
+                                <li>Migrated the website from WordPress to Next.js SSR with a headless CMS, lifting patient sign-ups by 15%.</li>
+                            </ul>
+                            <ul class="chips">
+                                <li>React</li><li>Next.js</li><li>Azure AD B2C</li><li>Datadog</li><li>Jest</li><li>Storybook</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="job" data-reveal>
+                        <div class="job__meta">
+                            <span class="job__date">Oct 2021 – Mar 2023</span>
+                            <span class="job__place">Bengaluru</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">Software Developer</h3>
+                            <p class="job__company">Phable Care <span>· Healthcare Technology</span></p>
+                            <ul class="job__points">
+                                <li>Led a team of 4 engineers to raise a doctor appointment booking platform to a PageSpeed score of 98–100 through code splitting, image optimisation, lazy loading and SSR in Next.js, supporting 78–80 appointments a week.</li>
+                                <li>Decoupled content with a Strapi headless CMS and config-driven pages, letting marketing update doctor profiles without engineers and cutting update time by 75%.</li>
+                                <li>Delivered e-commerce product, cart and checkout flows (upselling, saved cart, returns and refunds) and integrated Google Tag Manager and Search Console, driving an estimated 8x increase in organic CTR.</li>
+                            </ul>
+                            <ul class="chips">
+                                <li>Next.js</li><li>Strapi</li><li>Web performance</li><li>E-commerce</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="job" data-reveal>
+                        <div class="job__meta">
+                            <span class="job__date">May 2021 – Oct 2021</span>
+                            <span class="job__place">Pune</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">Software Developer (Graduate Engineer Trainee), R&amp;D</h3>
+                            <p class="job__company">Varroc Engineering Ltd. <span>· Electric Vehicles</span></p>
+                            <ul class="job__points">
+                                <li>Developed supervised machine learning models forecasting the Remaining Useful Life of lithium-ion EV battery cells at 99% accuracy, with JavaScript dashboards for battery-health data.</li>
+                            </ul>
+                            <ul class="chips">
+                                <li>Machine learning</li><li>JavaScript</li><li>Data dashboards</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Education -->
+                <div class="tabs__panel" id="education" role="tabpanel" aria-labelledby="tab-education" hidden>
+                    <article class="job">
+                        <div class="job__meta">
+                            <span class="job__date">2017 – 2021</span>
+                            <span class="job__place">Chennai</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">B.Tech., Electronics and Computer Engineering</h3>
+                            <p class="job__company">Vellore Institute of Technology <span>· CGPA 8.57/10</span></p>
+                        </div>
+                    </article>
+                    <article class="job">
+                        <div class="job__meta">
+                            <span class="job__date">Certifications</span>
+                            <span class="job__place">HackerRank</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">HackerRank certifications</h3>
+                            <p class="job__company"><span>Frontend Developer (React) role, plus React, JavaScript, SQL and CSS skills.</span></p>
+                            <a class="link-arrow job__link" href="#certifications">See all 7 certificates <i class="uil uil-arrow-down"></i></a>
+                        </div>
+                    </article>
+                    <article class="job">
+                        <div class="job__meta">
+                            <span class="job__date">2020 – 2021</span>
+                            <span class="job__place">Earlier</span>
+                        </div>
+                        <div class="job__body">
+                            <h3 class="job__role">Earlier certifications</h3>
+                            <ul class="job__points">
+                                <li>Web GIS Technology, Indian Space Research Organisation (2021)</li>
+                                <li><a href="https://www.credly.com/badges/9b67ffcc-6c13-40a4-a695-2ef6a1d4fb23/print" target="_blank" rel="noopener">Machine Learning with Python, IBM</a> (2020)</li>
+                                <li><a href="https://www.credly.com/badges/79180d67-c44c-4dfb-8a78-d2234fe3c696/print" target="_blank" rel="noopener">Node-RED: basics to bots, IBM</a> (2020)</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Achievements -->
+                <div class="tabs__panel" id="achievements" role="tabpanel" aria-labelledby="tab-achievements" hidden>
+                    <article class="job">
+                        <div class="job__meta"><span class="job__date">Jul 2021</span><span class="job__place">Bajaj Finserv</span></div>
+                        <div class="job__body">
+                            <h3 class="job__role">Winner, HackRx'21</h3>
+                            <p class="job__company">National healthcare hackathon by Bajaj Finserv, across 2.5k participants</p>
+                        </div>
+                    </article>
+                    <article class="job">
+                        <div class="job__meta"><span class="job__date">Jul 2020</span><span class="job__place">IIT Madras</span></div>
+                        <div class="job__body">
+                            <h3 class="job__role">Student Leader of the Year 2020</h3>
+                            <p class="job__company">Awarded by IIT Madras alumni for managing and building systems for the student chapter</p>
+                        </div>
+                    </article>
+                    <article class="job">
+                        <div class="job__meta"><span class="job__date">Nov 2019</span><span class="job__place">IIT Madras</span></div>
+                        <div class="job__body">
+                            <h3 class="job__role">Winner, Tinkathon</h3>
+                            <p class="job__company">DIY hackathon by the IIT Madras Alumni Center</p>
+                        </div>
+                    </article>
+                    <article class="job">
+                        <div class="job__meta"><span class="job__date">2021</span><span class="job__place">Open source</span></div>
+                        <div class="job__body">
+                            <h3 class="job__role">Rasa contributor</h3>
+                            <p class="job__company">Contributed to the Rasa conversational AI framework</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== PROJECTS ====================-->
+        <section class="section projects" id="projects">
+            <div class="container">
+                <div class="section__head section__head--split" data-reveal>
+                    <div>
+                        <p class="eyebrow">03 &nbsp;/&nbsp; Projects</p>
+                        <h2 class="section__title">Things I've built recently<span class="dot">.</span></h2>
+                    </div>
+                    <p class="section__lead">Designed, engineered and shipped on my own, end to end.</p>
+                </div>
+
+                <div class="feat" id="feat" data-reveal>
+                    <div class="feat__cards">
+                        <!-- 01 -->
+                        <article class="feat__card is-active" data-index="0" tabindex="0" aria-label="react-liquid-fill">
+                            <header class="feat__label">
+                                <span class="feat__num">01</span>
+                                <span class="feat__lead">react-liquid-fill</span>
+                                <span class="feat__rest">npm library</span>
+                            </header>
+                            <div class="feat__track"><span class="feat__fill"></span></div>
+                            <div class="feat__body">
+                                <a class="feat__media" href="https://react-liquid-fill.com/" target="_blank" rel="noopener" tabindex="-1">
+                                    <img src="assets/img/projects/liquid.webp" alt="react-liquid-fill website" loading="lazy" width="1600" height="1000">
+                                </a>
+                                <div class="feat__info">
+                                    <p>A React component and hook that pours colour into icons, buttons and text with an animated liquid edge on hover, focus or scroll. 2.7&nbsp;kB, zero dependencies, SSR-safe.</p>
+                                    <div class="feat__foot">
+                                        <ul class="chips"><li>React</li><li>TypeScript</li><li>npm</li></ul>
+                                        <a class="link-arrow" href="https://react-liquid-fill.com/" target="_blank" rel="noopener">Visit site <i class="uil uil-arrow-up-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 02 -->
+                        <article class="feat__card" data-index="1" tabindex="0" aria-label="noodl">
+                            <header class="feat__label">
+                                <span class="feat__num">02</span>
+                                <span class="feat__lead">noodl</span>
+                                <span class="feat__rest">AI mind-mapping app</span>
+                            </header>
+                            <div class="feat__track"><span class="feat__fill"></span></div>
+                            <div class="feat__body">
+                                <a class="feat__media" href="https://noodl.tech/" target="_blank" rel="noopener" tabindex="-1">
+                                    <img src="assets/img/projects/noodl.webp" alt="noodl website" loading="lazy" width="1600" height="1000">
+                                </a>
+                                <div class="feat__info">
+                                    <p>Every note is both an outline and a mind map. AI suggestions on every node and one-prompt map generation; local-first, works offline, and near-zero-cost infrastructure keeps it free.</p>
+                                    <div class="feat__foot">
+                                        <ul class="chips"><li>Next.js</li><li>Zustand</li><li>IndexedDB</li><li>Supabase</li></ul>
+                                        <a class="link-arrow" href="https://noodl.tech/" target="_blank" rel="noopener">Visit site <i class="uil uil-arrow-up-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 03 -->
+                        <article class="feat__card" data-index="2" tabindex="0" aria-label="PurrCast">
+                            <header class="feat__label">
+                                <span class="feat__num">03</span>
+                                <span class="feat__lead">PurrCast</span>
+                                <span class="feat__rest">read with your ears</span>
+                            </header>
+                            <div class="feat__track"><span class="feat__fill"></span></div>
+                            <div class="feat__body">
+                                <a class="feat__media" href="https://purrcast.vercel.app/" target="_blank" rel="noopener" tabindex="-1">
+                                    <img src="assets/img/projects/purrcast.webp" alt="PurrCast website" loading="lazy" width="1600" height="1000">
+                                </a>
+                                <div class="feat__info">
+                                    <p>Turns any article link, document or pasted text into an audio read-along narrated by natural neural voices. Click any sentence to jump there, with a companion Chrome extension.</p>
+                                    <div class="feat__foot">
+                                        <ul class="chips"><li>Next.js</li><li>Tailwind</li><li>Chrome extension</li></ul>
+                                        <a class="link-arrow" href="https://purrcast.vercel.app/" target="_blank" rel="noopener">Visit site <i class="uil uil-arrow-up-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- 04 -->
+                        <article class="feat__card" data-index="3" tabindex="0" aria-label="CreditQ">
+                            <header class="feat__label">
+                                <span class="feat__num">04</span>
+                                <span class="feat__lead">CreditQ</span>
+                                <span class="feat__rest">bill reminders</span>
+                            </header>
+                            <div class="feat__track"><span class="feat__fill"></span></div>
+                            <div class="feat__body">
+                                <a class="feat__media" href="https://credit-q.vercel.app/" target="_blank" rel="noopener" tabindex="-1">
+                                    <img src="assets/img/projects/creditq.webp" alt="CreditQ website" loading="lazy" width="1600" height="1000">
+                                </a>
+                                <div class="feat__info">
+                                    <p>Credit card bill reminders for India that group all your bills into one pay day. A calm, offline PWA: no account, no server copy, everything encrypted on the device.</p>
+                                    <div class="feat__foot">
+                                        <ul class="chips"><li>Next.js PWA</li><li>TypeScript</li><li>SCSS</li></ul>
+                                        <a class="link-arrow" href="https://credit-q.vercel.app/" target="_blank" rel="noopener">Visit site <i class="uil uil-arrow-up-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!--==================== CERTIFICATIONS ====================-->
+        <section class="section certs" id="certifications">
+            <div class="container">
+                <div class="section__head section__head--split" data-reveal>
+                    <div>
+                        <p class="eyebrow">04 &nbsp;/&nbsp; Certifications</p>
+                        <h2 class="section__title">Verified on HackerRank<span class="dot">.</span></h2>
+                    </div>
+                    <a class="count-chip" href="https://www.hackerrank.com/profile/sashankdebrgu7" target="_blank" rel="noopener">7 certificates on HackerRank <i class="uil uil-arrow-up-right"></i></a>
+                </div>
+
+                <div class="cert-grid" id="cert-grid">
+                    <a class="cert cert--role" href="https://www.hackerrank.com/certificates/384980329822" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">Frontend Developer (React)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">ROLE</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/777aed4d3fef" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">React (Basic)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/e9f88dae83b1" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">JavaScript (Intermediate)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/5df32b19353d" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">JavaScript (Basic)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/6d838ea2b363" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">SQL (Basic)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/bf159479417c" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">SQL (Intermediate)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                    <a class="cert cert--skill" href="https://www.hackerrank.com/certificates/7262c92d1253" target="_blank" rel="noopener" data-reveal>
+                        <span class="cert__paper">
+                            <span class="cert__top"><span>HackerRank</span><span>Certificate</span></span>
+                            <svg class="cert__badge" viewBox="0 0 32 40" aria-hidden="true"><circle cx="16" cy="13" r="10.5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="16" cy="13" r="5" fill="currentColor" opacity=".25"/><path d="M9.5 21.5 7 37l9-5 9 5-2.5-15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                            <span class="cert__name">CSS (Basic)</span>
+                            <span class="cert__verified"><i class="uil uil-check-circle"></i> Verified</span>
+                            <span class="cert__lines" aria-hidden="true"><span></span><span></span></span>
+                            <span class="cert__foot">
+                                <span class="cert__view">View PDF <i class="uil uil-arrow-up-right"></i></span>
+                                <span class="cert__tag">SKILL</span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="more-wrap">
+                    <button class="button button--ghost more-btn" type="button" id="cert-more" aria-expanded="false" aria-controls="cert-grid">
+                        <span class="more-btn__label">Load more</span> <i class="uil uil-plus"></i>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!--==================== SKILLS ====================-->
-        <section class="skills section" id="skills">
-            <h2 class="section__title">Skills</h2>
-            <span class="section__subtitle">My technical level</span>
-
-            <div class="skills__container container grid">
-                <div>
-                    
-                           <!--==================== Android ====================-->
-                           <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-android skills__icon"></i>
-                                <div>
-                                    <h1 class="skills__title">Frontend Development</h1>
-                                    <span class="skills__subtitle">More than 6 years</span>
-                                </div>
-    
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">HTML</h3>
-                                        <span class="skills__number">90%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__html"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CSS</h3>
-                                        <span class="skills__number">80%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__css"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">JavaScript</h3>
-                                        <span class="skills__number">60%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__javascript"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">React Js</h3>
-                                        <span class="skills__number">75%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__react"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Next.js</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__nextjs"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Material UI</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__materialui"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">TanStack</h3>
-                                        <span class="skills__number">80%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__tanstack"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Three.js & WebGL</h3>
-                                        <span class="skills__number">75%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__threejs"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Web Optimization</h3>
-                                        <span class="skills__number">90%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__weboptimization"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">CSS / SCSS</h3>
-                                        <span class="skills__number">85%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__scss"></span>
-                                    </div>
-                                </div>
-                                 <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Chart Js</h3>
-                                        <span class="skills__number">80%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__css"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Angular</h3>
-                                        <span class="skills__number">60%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__angular"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Android Studio</h3>
-                                        <span class="skills__number">50%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__android"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== Programming Languages ====================-->
-                        <div class="skills__content skills__close">
-                            <div class="skills__header">
-                                <i class="uil uil-arrow skills__icon"></i>
-                                <div>
-                                    <h1 class="skills__title">Programming Languages</h1>
-                                    <span class="skills__subtitle">More than 6 years</span>
-                                </div>
-    
-                                <i class="uil uil-angle-down skills__arrow"></i>
-                            </div>
-    
-                            <div class="skills__list grid">
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Java</h3>
-                                        <span class="skills__number">75%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__java"></span>
-                                    </div>
-                                </div>
-                                <div class="skills__data">
-                                    <div class="skills__titles">
-                                        <h3 class="skills__name">Python</h3>
-                                        <span class="skills__number">70%</span>
-                                    </div>
-                                    <div class="skills__bar">
-                                        <span class="skills__percentage skills__python"></span>
-                                    </div>
-                                </div>
-    
-                            </div>
-                        </div>
-
-                    
-                    <!--==================== Chatbot ====================-->
-                    <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-robot skills__icon"></i>
-                            <div>
-                                <h1 class="skills__title">Chatbot developer</h1>
-                                <span class="skills__subtitle">More than 3 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Rasa</h3>
-                                    <span class="skills__number">90%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__rasa"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">IBM Watson</h3>
-                                    <span class="skills__number">60%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__watson"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Dialogflow</h3>
-                                    <span class="skills__number">30%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__dialogflow"></span>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
+        <section class="section skills" id="skills">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <p class="eyebrow">05 &nbsp;/&nbsp; Skills</p>
+                    <h2 class="section__title">What I work with<span class="dot">.</span></h2>
                 </div>
-                <div>
-                    
 
-
-
-                    <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-object-ungroup skills__icon"></i>
-                            <div>
-                                <h1 class="skills__title">UI/ UX Design</h1>
-                                <span class="skills__subtitle">More than 5 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Wireframming</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__wireframming"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Figma</h3>
-                                    <span class="skills__number">90%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__figma"></span>
-                                </div>
-                            </div>
-
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Adobe InDesign</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__indesign"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Adobe Creative Suite</h3>
-                                    <span class="skills__number">70%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__creativesuite"></span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="skills__grid">
+                    <div class="skill-card" data-reveal>
+                        <i class="uil uil-brackets-curly skill-card__icon"></i>
+                        <h3>Languages</h3>
+                        <ul class="chips"><li>JavaScript</li><li>TypeScript</li><li>Java</li><li>HTML</li><li>CSS / SCSS</li></ul>
                     </div>
-                    <!--==================== Database & Backend ====================-->
-                    <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-database skills__icon"></i>
-                            <div>
-                                <h1 class="skills__title">Backend & Healthcare</h1>
-                                <span class="skills__subtitle">More than 5 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">REST APIs</h3>
-                                    <span class="skills__number">85%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__nextjs"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">GraphQL</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__graphql"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Azure AD B2C / Entra ID</h3>
-                                    <span class="skills__number">85%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__azureadb2c"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">HL7 FHIR & DICOM</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__fhir"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">SQL</h3>
-                                    <span class="skills__number">60%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__sql"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Firebase</h3>
-                                    <span class="skills__number">70%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__firebase"></span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <i class="uil uil-react skill-card__icon"></i>
+                        <h3>Frameworks &amp; libraries</h3>
+                        <ul class="chips"><li>React</li><li>Next.js</li><li>Node.js</li><li>Angular</li><li>Vue</li><li>Redux</li><li>MUI</li><li>TanStack</li><li>Three.js / WebGL</li></ul>
                     </div>
-                    <!--==================== Testing, Cloud & Tools ====================-->
-                    <div class="skills__content skills__close">
-                        <div class="skills__header">
-                            <i class="uil uil-code-branch skills__icon"></i>
-                            <div>
-                                <h1 class="skills__title">Testing, Cloud & Tools</h1>
-                                <span class="skills__subtitle">More than 3 years</span>
-                            </div>
-
-                            <i class="uil uil-angle-down skills__arrow"></i>
-                        </div>
-
-                        <div class="skills__list grid">
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Jest & Storybook</h3>
-                                    <span class="skills__number">85%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__jest"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Cypress & Playwright</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__cypress"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Azure Cloud</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__azure"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Strapi Headless CMS</h3>
-                                    <span class="skills__number">85%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__strapi"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Datadog & Observability</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__datadog"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">SonarCloud</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__sonarcloud"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Git</h3>
-                                    <span class="skills__number">75%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__git"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Typescript</h3>
-                                    <span class="skills__number">80%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__ts"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Docker</h3>
-                                    <span class="skills__number">50%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__docker"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">ElasticSearch</h3>
-                                    <span class="skills__number">30%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__elasticsearch"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">R studio</h3>
-                                    <span class="skills__number">65%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__rstudio"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Django</h3>
-                                    <span class="skills__number">50%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__django"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">MATLAB</h3>
-                                    <span class="skills__number">65%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__matlab"></span>
-                                </div>
-                            </div>
-                            <div class="skills__data">
-                                <div class="skills__titles">
-                                    <h3 class="skills__name">Adobe After Effects</h3>
-                                    <span class="skills__number">70%</span>
-                                </div>
-                                <div class="skills__bar">
-                                    <span class="skills__percentage skills__aftereffects"></span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="skill-card" data-reveal>
+                        <i class="uil uil-shield-check skill-card__icon"></i>
+                        <h3>Backend, security &amp; healthcare</h3>
+                        <ul class="chips"><li>REST APIs</li><li>GraphQL</li><li>Azure AD B2C</li><li>Entra ID</li><li>SSO</li><li>HL7 FHIR</li><li>DICOM</li><li>HIPAA</li></ul>
+                    </div>
+                    <div class="skill-card" data-reveal>
+                        <i class="uil uil-flask skill-card__icon"></i>
+                        <h3>Testing, cloud &amp; tools</h3>
+                        <ul class="chips"><li>Jest</li><li>Storybook</li><li>Cypress</li><li>Playwright</li><li>SonarCloud</li><li>Azure</li><li>Datadog</li><li>CI/CD</li><li>Figma</li></ul>
+                    </div>
+                    <div class="skill-card skill-card--wide" data-reveal>
+                        <i class="uil uil-layer-group skill-card__icon"></i>
+                        <h3>Core engineering</h3>
+                        <ul class="chips"><li>Web performance optimisation</li><li>System design</li><li>Data structures</li><li>Agile</li><li>Frontend architecture</li><li>Technical leadership</li></ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!--==================== QUALIFICATION ====================-->
-        <section class="qualification section">
-            <h2 class="section__title">Qualification</h2>
-            <span class="section__subtitle">My personal journey</span>
-            <div class="qualification__container container">
-                <div class="qualification__tabs">
-
-                    <div class="qualification__button button--flex qualification__active" data-target="#work">
-                        <i class="uil uil-briefcase-alt qualification__icon"></i>
-                        <p class="qualification__header">Work</p>
-                    </div>
-                    <div class="qualification__button button--flex" data-target="#achievements">
-                        <i class="uil uil-trophy qualification__icon"></i>
-                        <p class="qualification__header">Achievements</p>
-                    </div>
-                    <div class="qualification__button button--flex" data-target="#education">
-                        <i class="uil uil-graduation-cap qualification__icon"></i>
-                        <p class="qualification__header">Education</p>
-                    </div>
+        <!--==================== EARLIER WORK ====================-->
+        <section class="section earlier" id="earlier">
+            <div class="container">
+                <div class="section__head" data-reveal>
+                    <p class="eyebrow">06 &nbsp;/&nbsp; Archive</p>
+                    <h2 class="section__title">Earlier work<span class="dot">.</span></h2>
                 </div>
-                <div class="qualification__sections">
-                    <!--==================== QUALIFICATION CONTENT 1 - ACHIEVEMENTS ====================-->
-                    <div class="qualification__content" data-content id="achievements">
-                        <!--==================== achievements 1 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Hack RX'21 Winner</h3>
-                                <span class="qualification__subtitle">Winner of a software development hackathon organised 
-                                    by Bajaj Finserv across 2.5k participants.
-                                </span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    July 2021
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-                        <!--==================== achievements 2 ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            <div>
-                                <h3 class="qualification__title">Rasa Contributor</h3>
-                                <span class="qualification__subtitle">A starter tag when I first contributed in
-                                    Rasa</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    June 2021 - Present
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== achievements 3 ====================-->
-                        <div class="qualification__data">
-                           
-                            <div>
-                                <h3 class="qualification__title">Student Leader of the Year 2020</h3>
-                                <span class="qualification__subtitle">Awarded by IIT Madras alumni for management and developing systems for student chapter</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    July 2020
-                                </div>
-                            </div>
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-                    
-
-                        <!--==================== achievements 4 ====================-->
-                    <div class="qualification__data">
-                        <div></div>
-                        <div>
-                            <span class="qualification__rounder"></span>
-                            <span class="qualification__line"></span>
-                        </div>
-                        <div>
-                            <h3 class="qualification__title">Winner of TinkaThon - IIT Madras</h3>
-                            <span class="qualification__subtitle">A DIY hackathon organised by IIT Madras Alumni Center</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                Nov 2019
-                            </div>
-                        </div>
-
-                    </div>
+                                <div class="work-grid" id="work-grid">
+                    <a class="work" href="https://sashank-deb.github.io/Nitrogen/" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover6.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">Nitrogen To-Do</span>
+                        <span class="work__desc">A distraction-free, locally run task manager.</span>
+                    </a>
+                    <a class="work" href="https://haze-weather.web.app/" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">Haze Weather</span>
+                        <span class="work__desc">Dark-mode weather app with hourly and daily forecasts. React, Firebase.</span>
+                    </a>
+                    <a class="work" href="https://sashank-deb.github.io/Covid-Management-Website/Covid%20Website/" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover1.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">COVID-19 Management</span>
+                        <span class="work__desc">Case tracking and patient records, 100+ daily users during the pandemic.</span>
+                    </a>
+                    <a class="work" href="https://forest-cover-type-prediction.web.app/" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover2.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">Forest Cover Type</span>
+                        <span class="work__desc">ML classification of forest cover from cartographic data.</span>
+                    </a>
+                    <a class="work" href="https://youtu.be/cHN6rhQdTMk" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover3.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">Cardiac Health Monitor</span>
+                        <span class="work__desc">Classifies heart sounds as normal or abnormal. MATLAB, ML.</span>
+                    </a>
+                    <a class="work" href="https://www.behance.net/gallery/113627559/WEBSITE-MOCK-UP" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover4.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">PALS, IIT Madras</span>
+                        <span class="work__desc">Website design and build for the PALS student chapter.</span>
+                    </a>
+                    <a class="work" href="https://github.com/Sashank-Deb/Rasa-chatbot" target="_blank" rel="noopener" data-reveal>
+                        <span class="work__img"><img src="assets/img/Cover5.webp" alt="" loading="lazy"></span>
+                        <span class="work__title">Rasa Chatbot</span>
+                        <span class="work__desc">Context-aware assistant with Rasa and Rasa Webchat.</span>
+                    </a>
                 </div>
-                    <!--==================== QUALIFICATION CONTENT 2 - WORK ====================-->
-                    <div class="qualification__content qualification__active" data-content id="work">
-
-                        <!--==================== Work - RamSoft Inc. ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Senior Software Engineer</h3>
-                                <span class="qualification__subtitle">RamSoft Inc. &bull; Healthcare SaaS / Radiology Platform (Remote)</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Apr 2023 – Aug 2026
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                        <!--==================== Work - Phable Care ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-
-                            <div>
-                                <h3 class="qualification__title">Software Developer</h3>
-                                <span class="qualification__subtitle">Phable Care &bull; Healthcare Technology</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Oct 2021 – Mar 2023
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--==================== Work - Varroc Engineering ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Software Developer (GET)</h3>
-                                <span class="qualification__subtitle">Varroc Engineering Ltd &bull; R&D / Electric Vehicles (Pune)</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    May 2021 – Oct 2021
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                        <!--==================== Work - CoreEl ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-
-                            <div>
-                                <h3 class="qualification__title">Image Processing Internship</h3>
-                                <span class="qualification__subtitle">CoreEl Technologies &bull; Remote</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Jun 2020 - Jul 2020
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--==================== Work - Kohinoor ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Website design Internship</h3>
-                                <span class="qualification__subtitle">Kohinoor Group of Industries</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Apr 2020 - Jun 2020
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!--==================== QUALIFICATION CONTENT 3 - EDUCATION ====================-->
-                    <div class="qualification__content" data-content id="education">
-                        <!--==================== QUALIFICATION 1 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">B.Tech., Electronics & Computer Engineering</h3>
-                                <span class="qualification__subtitle">Vellore Institute of Technology, Chennai &bull; CGPA: 8.57/10</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    2017 – 2021
-                                </div>
-                            </div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                        <!--==================== QUALIFICATION 2 ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            <div>
-                                
-                                <h3 class="qualification__title">Web GIS Technology
-                                    Certification</h3>
-                                <a href=""  class="qualification__subtitle">Indian Space Research Organisation</a>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    June 2021 - July 2021
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!--==================== QUALIFICATION 3 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">Machine Learning with Python</h3>
-                                <a href="https://www.credly.com/badges/9b67ffcc-6c13-40a4-a695-2ef6a1d4fb23/print" target="_blank"  class="qualification__subtitle">IBM Badges</a>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Apr 2020 - May 2020
-                                </div>
-                            </div>
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-                        <!--==================== QUALIFICATION 4 ====================-->
-                        <div class="qualification__data">
-                            <div></div>
-
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                            <div>
-                                <h3 class="qualification__title">Node-RED: basics to bots
-                                    Certification</h3>
-                                <a href="https://www.credly.com/badges/79180d67-c44c-4dfb-8a78-d2234fe3c696/print"  class="qualification__subtitle">IBM Badges</a>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    May 2020
-                                </div>
-                            </div>
-                        </div>
-                        <!--==================== QUALIFICATION 5 ====================-->
-                        <div class="qualification__data">
-                            <div>
-                                <h3 class="qualification__title">PHP and
-                                    MySQL Training</h3>
-                                <span class="qualification__subtitle">Spoken Tutorials - IIT Bombay</span>
-                                <div class="qualification__calendar">
-                                    <i class="uil uil-calendar-alt"></i>
-                                    Feb 2020
-                                </div>
-                            </div>
-                            <div>
-                                <span class="qualification__rounder"></span>
-                                <span class="qualification__line"></span>
-                            </div>
-                        </div>
-
-               <!--==================== QUALIFICATION 6 ====================-->
-               <div class="qualification__data">
-                <div></div>
-
-                <div>
-                    <span class="qualification__rounder"></span>
-                    <span class="qualification__line"></span>
+                <div class="more-wrap">
+                    <button class="button button--ghost more-btn" type="button" id="work-more" aria-expanded="false" aria-controls="work-grid">
+                        <span class="more-btn__label">Load more</span> <i class="uil uil-plus"></i>
+                    </button>
                 </div>
-                <div>
-                    <h3 class="qualification__title">Java and Python 3.4.3
-                        Certification</h3>
-                    <span class="qualification__subtitle">Spoken Tutorials - IIT Bombay</span>
-                    <div class="qualification__calendar">
-                        <i class="uil uil-calendar-alt"></i>
-                        Feb 2020
-                    </div>
-                </div>
-
-
-
-                </div>
-            </div>
-            </div>
-            </div>
-
-        </section>
-        
-        <section class="portfolio section" id="portfolio">
-            <h2 class="section__title">Protfolio</h2>
-            <span class="section__subtitle">Most major work</span>
-
-            <div class="portfolio__container container swiper-container">
-                <div class="swiper-wrapper">
-                    <!--==================== PORTFOLIO 1 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        
-                        <svg width="45" height="51" viewBox="0 0 45 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M42.0582 10.2897C41.8648 10.0331 41.6582 9.78677 41.4392 9.55169C41.6595 8.96471 41.8268 8.35919 41.9392 7.74237C42.2709 5.48595 41.9828 3.1818 41.1059 1.07646C41.1059 1.07646 38.4396 0.243216 32.3212 4.3618C29.7237 3.64458 27.0406 3.28417 24.3459 3.29049C21.6435 3.28576 18.9528 3.64612 16.3468 4.3618C10.2285 0.195602 7.56209 1.07646 7.56209 1.07646C6.69576 3.15953 6.40788 5.43786 6.72885 7.67095C6.84181 8.31341 7.01723 8.94331 7.2526 9.55169C7.03834 9.78976 6.82407 10.0516 6.63362 10.2897C4.85707 12.518 3.91404 15.2966 3.96725 18.146C3.9616 18.8217 3.9934 19.4973 4.06248 20.1695C4.82416 30.716 11.8473 33.1681 18.537 33.9299C17.5901 34.8103 16.9481 35.9693 16.7039 37.239C16.4826 38.0858 16.3785 38.9589 16.3944 39.834V42.9517C13.7323 43.1882 10.9987 42.8008 10.1518 40.4249C9.24144 38.1515 7.73223 36.167 5.78452 34.6825C5.64298 34.6051 5.50837 34.5156 5.38219 34.4151C5.21115 33.9653 4.90797 33.5777 4.51251 33.3034C4.11706 33.0291 3.64785 32.881 3.16658 32.8784H3.15513C2.52568 32.8781 1.92177 33.1273 1.47559 33.5713C1.02941 34.0153 0.7773 34.618 0.774447 35.2474C0.765163 37.1817 2.70063 38.4302 3.49457 38.8556C4.42049 39.7886 5.16542 40.8851 5.69158 42.0896C6.55877 44.5261 9.09406 48.2273 16.3233 47.7461C16.3257 47.8298 16.328 47.9088 16.3291 47.9809L16.3396 48.6179C16.3395 48.9306 16.401 49.2402 16.5206 49.529C16.6402 49.8179 16.8156 50.0804 17.0367 50.3015C17.2578 50.5226 17.5202 50.6979 17.8091 50.8175C18.098 50.9371 18.4076 50.9987 18.7203 50.9986L18.7277 50.9971V50.9987H29.9433C30.256 50.9987 30.5656 50.9372 30.8545 50.8176C31.1434 50.698 31.4058 50.5226 31.6269 50.3016C31.848 50.0805 32.0234 49.818 32.143 49.5291C32.2626 49.2402 32.3241 48.9306 32.324 48.618C32.324 48.618 32.3415 41.0958 32.3415 39.8341C32.3573 38.9591 32.2532 38.0859 32.032 37.2392L32.0276 37.2246L32.0356 37.2392C32.0151 37.1558 31.9839 37.0879 31.9615 37.0071C31.6958 35.8278 31.0816 34.7557 30.1987 33.9299L30.2263 33.9796C30.2101 33.9649 30.1948 33.9441 30.1785 33.9299C36.8683 33.168 43.8437 30.6683 44.6055 20.1695C44.6746 19.4973 44.7063 18.8217 44.7007 18.1459C44.7428 15.3023 43.8103 12.5299 42.0582 10.2897V10.2897Z" fill="white"/>
-                            </svg>
-                            
-                        
-
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Github Projects</h3>
-                            <p class="portfolio__description"> I am working as an Fullstack Developer and have been exploring 
-                                android eco system for years now. Recently constructed some projects. Would be really glad to listen to your feedback. 
-                            </p>
-                            <div class="portfolio__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                Dec 2020 - Present
-                            </div>
-                            <a href="https://github.com/Sashank-Deb"
-                            class="button button--flex button--small videos__button" target="_blank">
-                            Currently working
-                        </a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 2 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M31.8999 22.975C31.5518 22.9736 31.2072 23.0449 30.8882 23.1844C30.5692 23.3239 30.2829 23.5284 30.0476 23.7849C29.8122 24.0415 29.633 24.3443 29.5215 24.6741C29.41 25.0039 29.3686 25.3533 29.3999 25.7H34.5499C34.5832 25.3403 34.5381 24.9777 34.4177 24.6371C34.2974 24.2964 34.1046 23.9859 33.8528 23.727C33.6009 23.468 33.2959 23.2666 32.9588 23.1368C32.6217 23.007 32.2604 22.9518 31.8999 22.975ZM18.7249 25.75H15.6499V30.6H18.1499C20.6499 30.6 21.7499 29.775 21.7499 28.1C21.7499 26.425 20.5999 25.75 18.7249 25.75V25.75ZM20.8999 21.3C20.8999 19.975 20.0249 19.175 18.5249 19.175H15.6499V23.525H17.7749C19.9999 23.525 20.8999 22.725 20.8999 21.3Z" fill="white"/>
-                            <path d="M25 0C20.0555 0 15.222 1.46622 11.1108 4.21326C6.99952 6.96029 3.79521 10.8648 1.90302 15.4329C0.0108321 20.0011 -0.484251 25.0277 0.480379 29.8773C1.44501 34.7268 3.82603 39.1813 7.32234 42.6777C10.8187 46.174 15.2732 48.555 20.1228 49.5196C24.9723 50.4843 29.9989 49.9892 34.5671 48.097C39.1352 46.2048 43.0397 43.0005 45.7867 38.8892C48.5338 34.778 50 29.9445 50 25C50 21.7169 49.3534 18.466 48.097 15.4329C46.8406 12.3998 44.9991 9.64379 42.6777 7.32233C40.3562 5.00086 37.6002 3.15938 34.5671 1.90301C31.534 0.646644 28.2831 0 25 0V0ZM19.25 33H12.5V16.75H19.25C22.175 16.75 24.1 18.275 24.1 20.75C24.1345 21.5815 23.8716 22.398 23.3585 23.0532C22.8453 23.7084 22.1155 24.1593 21.3 24.325C21.8168 24.337 22.3258 24.4543 22.7957 24.6698C23.2657 24.8852 23.6867 25.1943 24.033 25.5781C24.3794 25.9619 24.6438 26.4123 24.8101 26.9019C24.9763 27.3914 25.041 27.9096 25 28.425C25 31.325 22.5 33 19.25 33ZM28.125 18H35.625V19.25H28.125V18ZM37.5 27.625H29.25V27.975C29.207 28.3549 29.2459 28.7396 29.3642 29.1031C29.4824 29.4667 29.6772 29.8007 29.9355 30.0826C30.1937 30.3646 30.5094 30.5879 30.8612 30.7375C31.213 30.8871 31.5928 30.9596 31.975 30.95C32.5116 31.0334 33.0603 30.9198 33.5198 30.6304C33.9792 30.3409 34.3185 29.895 34.475 29.375H37.5C37.2306 30.5751 36.5284 31.6337 35.5276 32.3486C34.5268 33.0635 33.2976 33.3844 32.075 33.25C31.2936 33.3289 30.5045 33.2356 29.763 32.9767C29.0216 32.7179 28.3459 32.2996 27.7835 31.7515C27.2211 31.2034 26.7856 30.5387 26.5077 29.8042C26.2298 29.0696 26.1162 28.2831 26.175 27.5V26.4C26.1219 25.6412 26.2336 24.8798 26.5023 24.1682C26.771 23.4566 27.1905 22.8115 27.7319 22.2772C28.2734 21.7429 28.924 21.332 29.6391 21.0727C30.3542 20.8134 31.117 20.7119 31.875 20.775C32.6306 20.7266 33.3877 20.8406 34.0955 21.1093C34.8033 21.3781 35.4453 21.7954 35.9783 22.3331C36.5113 22.8708 36.9229 23.5165 37.1853 24.2266C37.4478 24.9368 37.5551 25.6949 37.5 26.45V27.625Z" fill="white"/>
-                            </svg>
-                            
-
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Behnace Projects</h3>
-                            <p class="portfolio__description">As designers we strive to make the perfect pizza out of complex problems/solutions 
-                                and serve it to the common people to consume and enjoy. 
-                                I believe at the core of any design, engineering solution, product, UI being human centered is the key. </p>
-                            <div class="portfolio__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                May 2019 - Present
-                            </div>
-                            <a href="https://www.behance.net/sashankdeb1"
-                            class="button button--flex button--small videos__button" target="_blank">
-                            Currently working
-                        </a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 3 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M25 50C38.8066 50 50 38.8066 50 25C50 11.1933 38.8066 0 25 0C11.1933 0 0 11.1933 0 25C0 38.8066 11.1933 50 25 50ZM39.936 37.3182V27.0106C39.936 21.4923 36.9897 18.9225 33.0576 18.9225C29.8828 18.9225 28.4663 20.67 27.672 21.8927V19.3449H21.6946C21.7751 21.031 21.6946 37.3183 21.6946 37.3183H27.672V27.2805C27.672 26.7408 27.7112 26.2077 27.87 25.8247C28.303 24.7497 29.2845 23.6378 30.9338 23.6378C33.099 23.6378 33.9607 25.2872 33.9607 27.7025V37.3182H39.936ZM27.672 21.8927V21.9512H27.6328C27.6382 21.9415 27.6452 21.932 27.6522 21.9224C27.6594 21.9125 27.6665 21.9026 27.672 21.8927ZM12.0637 13.7871C12.0637 12.0245 13.3997 10.6819 15.4452 10.6819C17.4885 10.6819 18.7462 12.0246 18.7854 13.7871C18.7854 15.5127 17.4885 16.892 15.4039 16.892H15.3669C13.3606 16.892 12.0637 15.5126 12.0637 13.7871ZM18.3915 37.3183H12.4184V19.3449H18.3915V37.3183Z" fill="white"/>
-                            </svg>
-                            
-
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">LinkedIn Profile</h3>
-                            <p class="portfolio__description">I am Computer Engineering under graduate proficient 
-                                in building software systems. Seasoned knowledge and understanding of 
-                                Full Stack Development and Graphic Design. A Machine learning enthusiast and a part 
-                                time Photographer.
-
-                            </p>
-                            <div class="portfolio__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                Jan 2018 - Present
-                            </div>
-                            <a href="https://www.linkedin.com/in/sashank-deb/"
-                            class="button button--flex button--small videos__button" target="_blank">
-                            Follow for updates !
-                        </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-button-next">
-                    <i class="uil uil-angle-right-b swiper-portfolio-icon"></i>
-                </div>
-                <div class="swiper-button-prev">
-                    <i class="uil uil-angle-left-b swiper-portfolio-icon"></i>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-
-        </section>
-
-
-        <!--==================== YT VIDEOS ====================-->
-        <section class="videos section" id="videos">
-            <div class="section__title">My Latest Projects</div>
-            <div class="section__subtitle">Check them Out
-                <br>HOLD and SWIPE for more !!
-                <i class="uil uil-arrow-right"></i>
-            </div>
-            <div>
-
-            </div>
-            <div class="videos__container container swiper-container">
-                <div class="swiper-wrapper">
-                                <!--==================== PROJECT - NITROGEN TODO ====================-->
-                                <div class="videos__content grid swiper-slide">
-                                    <img src="assets/img/Cover6.png" alt="Nitrogen To-Do App" class="videos__img">
-            
-                                    <div class="videos__data">
-                                        <h3 class="videos__title">Nitrogen To-Do App | Clean Local Task Management</h3>
-                                        <p class="videos__description">A no-nonsense, locally-run to-do list app with a clean, distraction-free UI for tracking tasks, organizing daily workflows, and boosting productivity.</p>
-                                        <a href="https://sashank-deb.github.io/Nitrogen/"
-                                            class="button button--flex button--small videos__button" target="_blank">
-                                            Explore Project
-                                            <i class="uil uil-external-link-alt button__icon"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!--==================== VIDEO 0 ====================-->
-                                <div class="videos__content grid swiper-slide">
-                                    <img src="assets/img/Cover.png" alt="" class="videos__img">
-            
-                                    <div class="videos__data">
-                                        <h3 class="videos__title">Designed and Implemented React Weather Mobile App | Fullstack </h3>
-                                        <p class="videos__description">A simple, beautiful and straightforward weather app with dark mode interface for enjoyable night
-                                            time experiences and with hourly and daily forecast of weather using React js, Firebase, Figma
-                                            prototyping and One weather API.
-                                            </p>
-                                        <a href="https://haze-weather.web.app/"
-                                            class="button button--flex button--small videos__button" target="_blank">
-                                            Explore Project
-                                            <i class="uil uil-play button__icon"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                    <!--==================== VIDEO 1 ====================-->
-                    <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover1.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">Covid-19 Management Web Application | Quick Guide</h3>
-                            <p class="videos__description">Hi there, I made an application using frontend frameworks and HTML, CSS, JS to track live Covid-19 numbers
-                                across states and book doctors and check availability to beds in hospital and book ambulances, the
-                                website is live and you can check it out in minutes! </p>
-                            <a href="https://sashank-deb.github.io/Covid-Management-Website/Covid%20Website/"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Explore Project
-                                <i class="uil uil-external-link-alt button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                   
-                    <!--==================== VIDEO 3 ====================-->
-                    <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover2.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">Forest cover type categorization using Machine Learning | R studio
-                            </h3>
-                            <p class="videos__description">To predict the forest cover type (the predominant kind of tree cover) from
-                                cartographic variables. The study area includes four wilderness areas located in the Roosevelt
-                                National Forest of northern Colorado. Each observation is a 30m x 30m patch. This project focuses to
-                                predict an integer classification for the forest cover type.
-                                 </p>
-                            <a href="https://forest-cover-type-prediction.web.app/"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Explore Project
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!--==================== VIDEO 4 ====================-->
-                    <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover3.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">Cardiac Health Monitoring System Using Machine Learning |
-                                MATLAB</h3>
-                            <p class="videos__description">In this project, we use Machine Learning to study the heart rates. Based on the heart sound
-                                recordings of the Physio-Net 2016 Dataset which consists of thousands of recorded heart sounds
-                                ranging in length from 5 seconds to 120 seconds. A model is developed that classifies heart sounds into
-                                normal vs abnormal, and deployed in a prototype (heart) screening application. This project aims
-                                ultimately to build a health monitoring system for cardiac patients to monitor his/her vital body
-                                parameters especially related to heart problems like ECG and heart rate.</p>
-                            <a href="https://youtu.be/cHN6rhQdTMk"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Play Video
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--==================== VIDEO 5 ====================-->
-                    <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover4.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">Designed and Implemented Website for PALS-IIT MADRAS | Lazy Tutorial</h3>
-                            <p class="videos__description">I Designed and Implemented Website for PALS-IIT MADRAS. This Lazy tutorial shows 
-                                how simple is to create proffient designs and implement that using engineering. This tutorial will guide you with each and every bit on</p>
-                            <a href="https://www.behance.net/gallery/113627559/WEBSITE-MOCK-UP"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Explore Project
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                     <!--==================== VIDEO 2 ====================-->
-                     <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover1.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">Implementing In App Nudges Using Angular Framework</h3>
-                            <p class="videos__description">Design and implemented an SDK using angular to an in-app tool to allow setting up in-app nudges for
-                                various use cases, tool to allow nudge configuration on screen without need of having to code them
-                                on the screen / per use case..</p>
-                            <a href="https://www.behance.net/gallery/124092919/In-app-Nudges-Bajaj-Finserv-HACKATHON21-%28Team-Oxygen%29"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Explore Project
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!--==================== VIDEO 6 ====================-->
-                    <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Cover5.png" alt="" class="videos__img">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title"> Rasa Chatbot | Open source framework to automate conversations</h3>
-                            <p class="videos__description">Hi there, Rasa is a context based leading conversational AI platform, I have used rasa to make a chatbot.
-                                I have used rasa webchat (A chat widget to deploy virtual assistants made with Rasa).
-                                
-                                </p>
-                            <a href="https://github.com/Sashank-Deb/Rasa-chatbot"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Explore Project
-                                <i class="uil uil-play button__icon"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!--==================== Redirect to youtube ====================-->
-                    <!-- <div class="videos__content grid swiper-slide">
-                        <img src="assets/img/Droidcity.png" alt="" class="videos__img rounded">
-
-                        <div class="videos__data">
-                            <h3 class="videos__title">For more videos click on below buttons
-                            </h3>
-                            <a href="https://www.youtube.com/c/DroidCity"
-                                class="button button--flex button--small videos__button" target="_blank">
-                                Go to Droid City
-                                <i class="uil uil-youtube button__icon"></i>
-                            </a>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="swiper-pagination swiper-pagination-youtube"></div>
             </div>
         </section>
 
-
-        <!--==================== CONTACT ME ====================-->
-        <section class="contact section" id="contact">
-            <div class="section__title">Contact Me</div>
-            <span class="section__subtitle">Get in touch</span>
-
-            <div class="contact__container container grid">
-                <div>
-                    <div class="contact__information">
-                        <i class="uil uil-phone contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Call Me</h3>
-                            <span class="contact__subtitle">+91 7397441915</span>
-                        </div>
-                    </div>
-                    <div class="contact__information">
-                        <i class="uil uil-envelope contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Email</h3>
-                            <span class="contact__subtitle">sashankdebrgu7@gmail.com</span>
-                        </div>
-                    </div>
-                    <div class="contact__information">
-                        <i class="uil uil-map-marker contact__icon"></i>
-
-                        <div>
-                            <h3 class="contact__title">Location</h3>
-                            <span class="contact__subtitle">Bengaluru, India</span>
-                        </div>
-                    </div>
-                </div>
-
-                <form id="contact-form" class="contact__form grid">
-                    <div class="contact__inputs grid">
-                        <div class="contact__content">
-                            <label for="contact-name" class="contact__label">Name</label>
-                            <input type="text" id="contact-name" name="name" class="contact__input" required placeholder="Your Name">
-                        </div>
-
-                        <div class="contact__content">
-                            <label for="contact-email" class="contact__label">Email</label>
-                            <input type="email" id="contact-email" name="email" class="contact__input" required placeholder="Your Email">
-                        </div>
-                    </div>
-
-                    <div class="contact__content">
-                        <label for="contact-message-input" class="contact__label">Message</label>
-                        <textarea id="contact-message-input" name="message" cols="0" rows="7" class="contact__input" required placeholder="Write your message here..."></textarea>
-                    </div>
-
+        <!--==================== WRITING ====================-->
+        <section class="section writing" id="writing">
+            <div class="container">
+                <div class="section__head section__head--split" data-reveal>
                     <div>
-                        <button type="submit" id="contact-button" class="button button--flex contact__button">
-                            Send Message
-                            <i class="uil uil-message button__icon"></i>
-                        </button>
+                        <p class="eyebrow">07 &nbsp;/&nbsp; Writing</p>
+                        <h2 class="section__title">Notes from Binary Trek<span class="dot">.</span></h2>
                     </div>
+                    <a class="count-chip" href="https://sashankdeb.hashnode.dev/" target="_blank" rel="noopener">5 posts on Hashnode <i class="uil uil-arrow-up-right"></i></a>
+                </div>
 
-                    <p id="contact-status" class="contact__message"></p>
-                </form>
+                <a class="post-feature" href="https://sashankdeb.hashnode.dev/react-liquid-fill" target="_blank" rel="noopener" data-reveal>
+                    <span class="post-feature__cover" aria-hidden="true">
+                        <span class="post-feature__kicker">// 01 &nbsp;open source</span>
+                        <span class="post-feature__big">2.7&nbsp;kB of<br>liquid colour<span class="dot">.</span></span>
+                        <span class="post-feature__blob"></span>
+                    </span>
+                    <span class="post-feature__body">
+                        <span class="post__chips"><span class="post__chip post__chip--hot">Featured</span><span class="post__chip">Open source</span></span>
+                        <span class="post-feature__title">React-Liquid-Fill</span>
+                        <span class="post-feature__brief">A reusable React component that fills SVG icons with colour from the side the cursor enters. Open source, zero dependencies, 2.7&nbsp;kB, and the story of how it was built.</span>
+                        <span class="post__meta">Oct 12, 2026 · 6 min read <i class="uil uil-arrow-up-right"></i></span>
+                    </span>
+                </a>
 
+                <div class="post-grid">
+                    <a class="post" href="https://sashankdeb.hashnode.dev/react-keys-aren-t-just-for-silencing-warnings-identity-reconciliation-and-state" target="_blank" rel="noopener" data-reveal>
+                        <span class="post__top"><span class="post__num">02</span><span class="post__tag">React</span></span>
+                        <h3 class="post__title">React keys aren't just for silencing warnings</h3>
+                        <p class="post__brief">Why array indexes and random IDs break lists, and how keys decide whether a component keeps its state.</p>
+                        <span class="post__meta">Oct 12, 2026 · 8 min read <i class="uil uil-arrow-up-right"></i></span>
+                    </a>
+                    <a class="post" href="https://sashankdeb.hashnode.dev/preload-preconnect-prefetch-in-a-nutshell" target="_blank" rel="noopener" data-reveal>
+                        <span class="post__top"><span class="post__num">03</span><span class="post__tag">Performance</span></span>
+                        <h3 class="post__title">Preload, preconnect, prefetch in a nutshell</h3>
+                        <p class="post__brief">Stop guessing and start using resource hints right.</p>
+                        <span class="post__meta">Oct 8, 2026 · 7 min read <i class="uil uil-arrow-up-right"></i></span>
+                    </a>
+                    <a class="post" href="https://sashankdeb.hashnode.dev/beginners-guide-to-using-the-react-compiler" target="_blank" rel="noopener" data-reveal>
+                        <span class="post__top"><span class="post__num">04</span><span class="post__tag">React</span></span>
+                        <h3 class="post__title">Beginner's guide to using the React Compiler</h3>
+                        <p class="post__brief">Not a step-by-step guide to the React Compiler.</p>
+                        <span class="post__meta">May 17, 2024 · 5 min read <i class="uil uil-arrow-up-right"></i></span>
+                    </a>
+                    <a class="post" href="https://sashankdeb.hashnode.dev/what-makes-react-a-library" target="_blank" rel="noopener" data-reveal>
+                        <span class="post__top"><span class="post__num">05</span><span class="post__tag">Fundamentals</span></span>
+                        <h3 class="post__title">What makes React a library?</h3>
+                        <p class="post__brief">How React's flexibility and fit into existing projects make it a library, not a framework.</p>
+                        <span class="post__meta">Oct 11, 2023 · 5 min read <i class="uil uil-arrow-up-right"></i></span>
+                    </a>
+                </div>
+
+                <a class="blog-banner" href="https://sashankdeb.hashnode.dev/" target="_blank" rel="noopener" data-reveal>
+                    <span class="blog-banner__text">
+                        <span class="eyebrow">The blog</span>
+                        <span class="blog-banner__title">Read everything on Binary Trek</span>
+                    </span>
+                    <span class="blog-banner__go" aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                </a>
+            </div>
+        </section>
+
+        <!--==================== RECOMMENDATIONS ====================-->
+        <section class="section recs" id="recommendations">
+            <div class="container">
+                <div class="section__head section__head--split" data-reveal>
+                    <div>
+                        <p class="eyebrow">08 &nbsp;/&nbsp; Recommendations</p>
+                        <h2 class="section__title">What people say<span class="dot">.</span></h2>
+                    </div>
+                    <p class="section__lead">From the managers, product partners and engineers I've built with, straight from LinkedIn.</p>
+                </div>
+
+                <figure class="rec-quote" data-reveal>
+                    <blockquote>“Real technical depth paired with genuine care about getting it right is rarer than it should be. <mark>Strongest possible recommendation.</mark>”</blockquote>
+                    <figcaption><img class="rec__avatar" src="assets/img/recs/saiteja.webp" alt="Saiteja Ganapavarapu" width="96" height="96" loading="lazy"> Saiteja Ganapavarapu <span>· managed me at RamSoft</span></figcaption>
+                </figure>
+
+                <div class="rec-grid">
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/saiteja.webp" alt="Saiteja Ganapavarapu" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Saiteja Ganapavarapu</h3>
+                        <p class="rec__role" title="Senior Software Engineer | Full-Stack &amp; AI Engineering | Healthcare Tech">Senior Software Engineer | Full-Stack &amp; AI Engineering | Healthcare Tech</p>
+                        <p class="rec__rel">Managed Sashank directly · Aug 27, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>I’ve worked with a lot of engineers. Sashank Deb, who I was privileged to have on my team at RamSoft, is in the small group I’d call first if I were building a team from scratch.</p><p>He’s technically sharp on React, the kind of frontend work that goes beyond making things work to making them right. But what stood out more was his instinct to do the right thing even when the shortcut was sitting right there. He’d flag the fragile fix instead of shipping it quietly, and push for the solution that would hold up rather than the one that would just get the ticket closed.</p><p>That combination - real technical depth paired with genuine care about getting it right is rarer than it should be. Strongest possible recommendation.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/abhishek.webp" alt="Abhishek Dixit" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Abhishek Dixit</h3>
+                        <p class="rec__role" title="Shipping Scalable Web &amp; Mobile Products | Agentic Engineering">Shipping Scalable Web &amp; Mobile Products | Agentic Engineering</p>
+                        <p class="rec__rel">Senior colleague · Aug 27, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>Sashank is one of those people I’ve had the privilege of watching grow from a sharp college graduate into a highly dependable full-stack engineer. I’ve worked with him for close to 5 years, and I still remember interviewing him during our college placements. He stood out right away with his strong CS fundamentals, problem-solving ability, and sharp technical thinking.</p><p>Over the years, Sashank has grown tremendously and established himself as a reliable team member with strong full-stack development capabilities. While I haven’t directly managed him, we’ve collaborated across multiple projects, and he consistently exceeded expectations. His ownership, technical skills, and commitment to delivering quality work have always been impressive.</p><p>One thing that particularly stands out is his eye for detail and pixel-perfect delivery. He cares about getting things right, not just getting them done. Beyond his technical strengths, he’s also a genuinely fun person to work with and someone who brings great energy to the team.</p><p>Sashank is the kind of person who can adapt to any role, fit into any team, and make an impact. I’d highly recommend him to any organization looking for a talented, dependable, and versatile engineer.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/riddhish.webp" alt="Riddhish Bambhroliya" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Riddhish Bambhroliya</h3>
+                        <p class="rec__role" title="Software Developer at RamSoft | C#, .NET, Azure, React, SQL Server | Healthcare SaaS">Software Developer at RamSoft | C#, .NET, Azure, React, SQL Server | Healthcare SaaS</p>
+                        <p class="rec__rel">Senior colleague · Aug 27, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>I had the privilege of collaborating with Sashank on several high‑impact initiatives within our team, most notably the development of the agentic workflow that we co‑designed. This solution eliminated roughly 90 % of the manual effort that previously required extensive coding and maintenance. The project demanded rapid mastery of a complex new technology stack, and Sashank not only absorbed the concepts quickly but also demonstrated a deep understanding of their constraints and opportunities, enabling us to engineer a robust, scalable solution.</p><p>Beyond his technical expertise, Sashank consistently contributes strategic insight to our product roadmap. He evaluates feature proposals with a critical eye, advising on what to prioritize, what to skip, and where to invest the most leverage. His input has repeatedly steered our direction toward more impactful outcomes, proving invaluable to the team’s success. I wholeheartedly recommend taking advantage of his skill set and dedication.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/venkata.webp" alt="Venkata Karthik Belusonti" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Venkata Karthik Belusonti</h3>
+                        <p class="rec__role" title="Senior Product Manager | SDLC | B2B &amp; B2C SaaS | PMP® | CSPO">Senior Product Manager | SDLC | B2B &amp; B2C SaaS | PMP® | CSPO</p>
+                        <p class="rec__rel">Managed Sashank directly · Aug 26, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>I had the pleasure of working with Sashank and was consistently impressed by his technical expertise, problem-solving ability, and ownership. He is a highly collaborative developer who understands product requirements, tackles complex challenges effectively, and delivers high-quality solutions.</p><p>As a Product Manager, I truly valued his reliability, proactive approach, and partnership throughout the product development lifecycle. I would highly recommend Sashank to any team looking for a strong and dependable engineering professional.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/vo.webp" alt="Vo Van" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Vo Van</h3>
+                        <p class="rec__role" title="Software developer">Software developer</p>
+                        <p class="rec__rel">Same team · Aug 27, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>I highly recommend Sashank as a Frontend Developer. Having been his colleague for nearly 3 years, I’ve always admired his ability to learn fast and adapt to new technologies seamlessly. He possesses a deep understanding of Microsoft’s B2C platform, which was crucial for our project&#x27;s success. Even under tight deadlines and high pressure, Sashank remains calm, focused, and consistently delivers high-quality code. He is a fantastic teammate and a great asset to any tech team.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                    <article class="rec" data-reveal>
+                        <header class="rec__head">
+                        <img class="rec__avatar" src="assets/img/recs/ayonija.webp" alt="Ayonija Mathur" width="96" height="96" loading="lazy">
+                        <div class="rec__who">
+                        <h3 class="rec__name">Ayonija Mathur</h3>
+                        <p class="rec__role" title="Senior Software Engineer @ BNY | Platform &amp; AI Systems | MCP · Java · Spring Boot · TypeScript">Senior Software Engineer @ BNY | Platform &amp; AI Systems | MCP · Java · Spring Boot · TypeScript</p>
+                        <p class="rec__rel">Worked together at PALS, VIT · Nov 13, 2026</p>
+                        </div>
+                        <svg class="rec__li" viewBox="0 0 24 24" aria-label="LinkedIn"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M7.1 9.6H4.7V19h2.4V9.6zM5.9 5.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM19.3 13.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5h-.1V9.6h-2.3V19h2.4v-4.6c0-1.2.2-2.4 1.7-2.4 1.5 0 1.5 1.4 1.5 2.5V19h2.4l.5-5.2z"/></svg>
+                        </header>
+                        <div class="rec__text"><p>I had the pleasure of working with Sashank during our time at PALS, VIT Chennai, and what always stood out was his ability to turn ideas into action. He was someone who consistently took initiative, thought beyond his immediate responsibilities, and looked for ways to create a meaningful impact.</p><p>Sashank played an instrumental role in strengthening PALS, from building its digital presence and connecting students with industry leaders through IIT Madras&#x27;s startup incubation ecosystem to organising hackathons that opened doors for talented students.</p><p>What sets him apart is his ownership, problem-solving mindset, and ability to bring people together around a common goal. He combines strong technical abilities with excellent execution and a genuine willingness to help others grow.</p><p>Sashank is someone who doesn&#x27;t just participate but actively makes things happen. I would wholeheartedly recommend him to any team looking for a driven, dependable, and capable engineer.</p></div>
+                        <footer class="rec__foot">
+                        <button class="rec__more" type="button" aria-expanded="false">Show more</button>
+                        <a class="rec__link" href="https://www.linkedin.com/in/sashank-deb/details/recommendations/" target="_blank" rel="noopener">Read on LinkedIn <i class="uil uil-arrow-up-right"></i></a>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== CONTACT / CTA ====================-->
+        <section class="cta" id="contact">
+            <div class="container cta__container">
+                <h2 class="cta__title" data-reveal>We may work<br> well together<span class="dot">.</span></h2>
+
+                <div class="cta__actions" data-reveal>
+                    <a class="pill pill--lg" href="mailto:sashankdebrgu7@gmail.com?subject=Let%27s%20work%20together" aria-label="Email Sashank">
+                        <span class="pill__faces" aria-hidden="true">
+                            <img class="pill__avatar" src="assets/img/headshot.png" alt="" width="44" height="44">
+                            <span class="pill__gmail">
+                                <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M7 39h7V22L4 14.5V36a3 3 0 0 0 3 3z"/><path fill="#34A853" d="M34 39h7a3 3 0 0 0 3-3V14.5L34 22z"/><path fill="#FBBC04" d="M34 12v10l10-7.5v-3c0-3.7-4.2-5.8-7.2-3.6z"/><path fill="#EA4335" d="M14 22V12l10 7.5L34 12v10l-10 7.5z"/><path fill="#C5221F" d="M4 11.5v3L14 22V12l-2.8-2.1C8.2 7.7 4 9.8 4 11.5z"/></svg>
+                            </span>
+                        </span>
+                        <span class="pill__label">Send me an email</span>
+                        <i class="uil uil-arrow-right pill__arrow" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="cta__link" href="https://www.linkedin.com/in/sashank-deb/" target="_blank" rel="noopener">Or reach me on LinkedIn</a>
+                </div>
+
+                <div class="cta__details" data-reveal>
+                    <button class="cta__copy" type="button" id="copy-email" data-email="sashankdebrgu7@gmail.com">
+                        <span>sashankdebrgu7@gmail.com</span>
+                        <i class="uil uil-copy"></i>
+                        <span class="cta__copied" aria-live="polite"></span>
+                    </button>
+                    <a href="tel:+917397441915">+91 73974 41915</a>
+                    <span>Bengaluru, India</span>
+                </div>
             </div>
         </section>
     </main>
 
     <!--==================== FOOTER ====================-->
     <footer class="footer">
-        <div class="footer__bg">
-            <div class="footer__container container grid">
-                <div>
-                    <h1 class="footer__title">Sashank</h1>
-                    <span class="footer__subtite">Fullstack Developer</span>
-                </div>
-
-                <ul class="footer__links">
-                    <li>
-                        <a href="#videos" class="footer__link">Videos</a>
-                        <a href="" style="text-decoration: none; color: white;"> | </a>
-                        <a href="#portfolio" class="footer__link">Portfolio</a>
-                        <a href="" style="text-decoration: none; color: white;"> | </a>
-                        <a href="#contact" class="footer__link">Contact</a>
-                    </li>
-                </ul>
-
-                <div class="footer__socials">
-                    <a href="https://www.instagram.com/sashank_deb/" class="footer__social" target="_blank">
-                        <i class="uil uil-instagram"></i>
-                    </a>
-
-                    <a href="https://twitter.com/SashankDeb" class="footer__social" target="_blank">
-                        <i class="uil uil-twitter"></i>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/sashank-deb/" class="footer__social" target="_blank">
-                        <i class="uim uim-linkedin-alt"></i>
-                    </a>
-                </div>
+        <div class="container footer__container">
+            <div>
+                <p class="footer__title">Sashank Deb<span class="dot">.</span></p>
+                <p class="footer__subtitle">Senior Software Engineer</p>
             </div>
-            <p class="footer__copy">&#169; Sashank Deb. All rights reserved</p>
-        </div>
 
+            <ul class="footer__links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#writing">Writing</a></li>
+                <li><a href="https://sashankdeb.hashnode.dev/" target="_blank" rel="noopener">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="footer__socials">
+                <a href="https://www.linkedin.com/in/sashank-deb/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="uil uil-linkedin"></i></a>
+                <a href="https://github.com/Sashank-Deb" target="_blank" rel="noopener" aria-label="GitHub"><i class="uil uil-github"></i></a>
+                <a href="https://www.behance.net/sashankdeb1" target="_blank" rel="noopener" aria-label="Behance"><i class="uil uil-behance"></i></a>
+                <a href="https://www.instagram.com/sashank_deb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="uil uil-instagram"></i></a>
+                <a href="https://twitter.com/SashankDeb" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="uil uil-twitter"></i></a>
+            </div>
+        </div>
+        <p class="footer__copy container"><span>&copy; <span id="year">2026</span> Sashank Deb. All rights reserved. <button class="footer__replay" type="button" data-replay-intro hidden>Replay intro</button></span></p>
     </footer>
 
-    <!--==================== SCROLL TOP ====================-->
-    <a href="#" class="scrollup" id="scroll-up">
-        <i class="uil uil-arrow-up scrollup__icon"></i>
+    <a href="#home" class="scrollup" id="scroll-up" aria-label="Back to top">
+        <i class="uil uil-arrow-up"></i>
     </a>
 
-    <!--==================== CHATWIDGET ====================-->
-
-    <style>
- 
-
-        .rw-launcher {
-            box-shadow: 0 0px 0px 0px;
-        }
-
-        @media screen and (min-width: 768px) {
-            .rw-launcher {
-                margin-bottom: 0rem;
-            }
-
-        }
-    </style>
-
-    <script>
-        const emoji = document.getElementById('cursorEmoji');
-        const urlA = "./assets/img/meme-pop-cat-cursor.png";
-        const urlB = "./assets/img/meme-pop-cat-pointer.png";
-
-        let showingA = true;
-        let intervalId = null;
-
-        emoji.addEventListener('click', () => {
-            // Only start the toggle loop once, on the first click
-            if (intervalId === null) {
-            intervalId = setInterval(() => {
-                emoji.src = showingA ? urlB : urlA;
-                showingA = !showingA;
-            }, 250);
-            }
-        });
-    </script>
-    <script>
-    const card = document.getElementById('about-media-wrapper');
-
-    card.addEventListener('mousemove', (e) => {
-      // Get dimensions and bounding positions of the card
-      const rect = card.getBoundingClientRect();
-      
-      // Calculate mouse position relative to the card's edge (0 to width/height)
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Find the center point of the card
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      // Calculate angle based on distance from center 
-      // Max rotation is roughly 20 degrees
-      const rotateX = ((centerY - y) / centerY) * 20;
-      const rotateY = ((x - centerX) / centerX) * 20;
-      
-      // Apply the rotation dynamically
-      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
-
-    // Reset card position smoothly when mouse leaves
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s ease';
-      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    });
-
-    // Restore fast tracking transition when mouse re-enters
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'transform 0.5s ease-out';
-    });
-  </script>
-
-  <script>
-    const cursor = document.querySelector('.about__img-wrapper');
-    const cursors = [
-        'url("./assets/img/meme-pop-cat-cursor.png") 32 32, auto',
-        'url("./assets/img/meme-pop-cat-pointer.png") 32 32, auto'
-        ];
-
-        let interval;
-        let debounce;
-        let index = 0;
-
-        cursor.addEventListener('mousemove', () => {
-        // Start only once
-        if (!interval) {
-            interval = setInterval(() => {
-            index = (index + 1) % cursors.length;
-            cursor.style.cursor = cursors[index];
-            }, 150);
-        }
-
-        // Debounce movement stopping
-        clearTimeout(debounce);
-
-        debounce = setTimeout(() => {
-            clearInterval(interval);
-            interval = null;
-
-            index = 0;
-            cursor.style.cursor = cursors[0];
-        }, 50);
-        });
-  </script>
-    
-    <!-- <script>!(function () {
-            let e = document.createElement("script"),
-                t = document.head || document.getElementsByTagName("head")[0];
-            (e.src =
-                "https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.0/lib/index.js"),
-                (e.async = !0),
-                (e.onload = () => {
-                    window.WebChat.default(
-                        {
-                            initPaylod: "/greet",
-                            customData: { language: "en" },
-                            socketUrl: "https://rasa-horizon733.cloud.okteto.net/",
-                            title: 'Portfolio Bot',
-                            subtitle: 'Currently in development',
-                            showMessageDate: true,
-                            // openLauncherImage: "./assets/img/launcher.svg",
-                            closeImage: "./assets/img/close.svg",
-                            inputTextFieldHint: "What's in your mind ?...",
-                    // add other props here
-                    params: {
-                        images: {
-                            dims: {
-                                width: 300,
-                                height: 200
-                                  }
-                                },
-                                storage: "session"
-                            }
-                        },
-                        null
-                    );
-                }),
-                t.insertBefore(e, t.firstChild);
-        })();
-    </script> -->
-
-    <!--==================== SWIPER JS ====================-->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-
-    <!--==================== MAIN JS ====================-->
+    <script src="assets/js/sound.js"></script>
     <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>
