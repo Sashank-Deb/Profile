@@ -29,13 +29,26 @@ $('#theme-button')?.addEventListener('click', () => {
 /*==================== HEADER / SCROLL UP ====================*/
 const header = $('#header');
 const scrollUpBtn = $('#scroll-up');
+let scrollTicking = false;
 const onScroll = () => {
-    const y = window.scrollY;
-    header.classList.toggle('scroll-header', y > 12);
-    scrollUpBtn.classList.toggle('show-scroll', y > 640);
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+        const y = window.scrollY;
+        header.classList.toggle('scroll-header', y > 12);
+        scrollUpBtn.classList.toggle('show-scroll', y > 640);
+        scrollTicking = false;
+    });
 };
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+/*==================== PAUSE OFF-SCREEN LOOPS ====================*/
+// The morphing blobs, spinning ring and floating dots loop forever; only run them while visible.
+const loopObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle('is-offscreen', !e.isIntersecting));
+}, { rootMargin: '100px 0px' });
+$$('.portrait, .post-feature, .feat').forEach((el) => loopObserver.observe(el));
 
 /*==================== ACTIVE NAV LINK ====================*/
 const navLinks = new Map($$('.nav__link').map((a) => [a.getAttribute('href').slice(1), a]));
