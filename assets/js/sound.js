@@ -61,8 +61,15 @@
     };
 
     const sounds = {
-        tick: (c) => tone(c, { type: 'sine', from: 1400, to: 900, dur: 0.045, vol: 0.035 }),
-        soft: (c) => tone(c, { type: 'triangle', from: 660, to: 520, dur: 0.07, vol: 0.04 }),
+        // low, rounded "thock": a short sine drop plus a hint of muffled body
+        tick: (c) => {
+            tone(c, { type: 'sine', from: 380, to: 210, dur: 0.07, vol: 0.05 });
+            noise(c, { dur: 0.03, vol: 0.025, f0: 900, f1: 300 });
+        },
+        soft: (c) => {
+            tone(c, { type: 'sine', from: 300, to: 170, dur: 0.09, vol: 0.05 });
+            noise(c, { dur: 0.035, vol: 0.02, f0: 700, f1: 250 });
+        },
         'toggle-on': (c) => { tone(c, { from: 620, dur: 0.06, vol: 0.04 }); tone(c, { from: 930, dur: 0.08, vol: 0.04, at: 0.06 }); },
         'toggle-off': (c) => { tone(c, { from: 930, dur: 0.06, vol: 0.04 }); tone(c, { from: 620, dur: 0.08, vol: 0.04, at: 0.06 }); },
         whoosh: (c) => noise(c, { dur: 0.22, vol: 0.12, filter: 'bandpass', f0: 600, f1: 3200, q: 1.2 }),
