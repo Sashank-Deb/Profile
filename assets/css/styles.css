@@ -58,6 +58,8 @@ body::before {
     background-image: var(--grain);
     opacity: .05;
     z-index: 999;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 h1, h2, h3 { color: var(--ink); font-family: var(--font-display); line-height: 1.1; }
@@ -303,15 +305,17 @@ html[data-intro="skip"] .hero__container { animation: op-rise .6s cubic-bezier(.
 @keyframes op-rise { from { opacity: .35; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .footer__replay { margin-left: 12px; font: inherit; color: var(--mustard); text-decoration: underline; text-underline-offset: 3px; }
 
+/* looping decorations pause while off screen (set by main.js) */
+.is-offscreen, .is-offscreen *, .is-offscreen::before, .is-offscreen::after { animation-play-state: paused !important; }
+
 /*==================== HEADER ====================*/
 .header {
     position: fixed;
     inset: 0 0 auto;
     z-index: 100;
     height: var(--header-h);
-    background: color-mix(in srgb, var(--bg) 82%, transparent);
-    backdrop-filter: saturate(1.4) blur(14px);
-    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    transform: translateZ(0);
     border-bottom: 1px solid transparent;
     transition: border-color .3s, background-color .4s;
 }
@@ -387,7 +391,7 @@ html[data-intro="skip"] .hero__container { animation: op-rise .6s cubic-bezier(.
     justify-self: center;
 }
 .portrait__frame,
-.portrait__blob { position: absolute; border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+.portrait__blob { position: absolute; border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; will-change: border-radius, transform; }
 .portrait__frame {
     inset: 0;
     z-index: 2;
@@ -955,8 +959,7 @@ html.dark-theme .cert__paper { background: #EFEBE4; }
     content: "";
     position: absolute; inset: 0; z-index: -1;
     background-image: var(--grain);
-    opacity: .22;
-    mix-blend-mode: multiply;
+    opacity: .14;
 }
 .cta__title {
     color: var(--cream);
