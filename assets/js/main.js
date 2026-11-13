@@ -406,6 +406,7 @@ copyBtn?.addEventListener('click', async () => {
         op.hidden = true;
         op.classList.remove('is-play', 'is-static');
         root.removeAttribute('data-intro');
+        root.classList.remove('op-covering');
         $$('[data-replay-intro]').forEach((b) => { b.hidden = false; });
     };
     const play = () => {
@@ -416,6 +417,7 @@ copyBtn?.addEventListener('click', async () => {
         op.hidden = false;
         void op.offsetWidth;
         op.classList.add(reduceMotion ? 'is-static' : 'is-play');
+        root.classList.add('op-covering'); // curtain is fully opaque now, so the page can sit ready underneath
         const fade = reduceMotion ? op.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, delay: 1200, easing: 'ease', fill: 'forwards' }) : null;
         if (fade) fade.onfinish = done;
         const onKey = (e) => { if (e.key === 'Escape') done(); };
@@ -440,6 +442,7 @@ copyBtn?.addEventListener('click', async () => {
         history.replaceState(history.state, '', url.pathname + url.search + url.hash);
     }
     if (mode === 'play') {
+        window.__opClaimed = true; // tell the <head> safety net the intro is ours from here
         // short beat so fonts and the photo are ready before the first frame
         const fonts = document.fonts?.ready ?? Promise.resolve();
         Promise.all([new Promise((r) => setTimeout(r, 300)), Promise.race([fonts, new Promise((r) => setTimeout(r, 700))])]).then(play);
