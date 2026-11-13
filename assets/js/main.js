@@ -221,6 +221,115 @@ if (media && video) {
     }
 }
 
+/*==================== SPLIT-FLAP BOARD (footer) ====================*/
+// Hand-rolled split-flap board: each tile has two static halves and two hinged leaves.
+// It starts flipping when it scrolls into view, and only makes sound while visible.
+const initFlapboard = (board) => {
+    const CHARS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,'!?&-";
+    const cols = Number(board.dataset.cols) || 8;
+    const screens = board.dataset.lines.split(';').map((s) => s.split('|'));
+    const rows = Math.max(...screens.map((s) => s.length));
+    board.style.setProperty('--cols', cols);
+
+    const face = (span, ch) => {
+        span.textContent = ch === ' ' ? ' ' : ch;
+        span.classList.toggle('is-dot', ch === '.');
+    };
+    const half = (cls) => {
+        const d = document.createElement('span');
+        d.className = `flap__half ${cls}`;
+        const s = document.createElement('span');
+        d.appendChild(s);
+        return { el: d, span: s };
+    };
+
+    const tiles = [];
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const el = document.createElement('span');
+            el.className = 'flap';
+            const sTop = half('flap__half--top');
+            const sBot = half('flap__half--bottom');
+            const lTop = half('flap__half--top flap__leaf flap__leaf--top');
+            const lBot = half('flap__half--bottom flap__leaf flap__leaf--bottom');
+            el.append(sTop.el, sBot.el, lTop.el, lBot.el);
+            [sTop, sBot, lTop, lBot].forEach((h) => face(h.span, ' '));
+            board.appendChild(el);
+            tiles.push({ r, c, cur: ' ', sTop, sBot, lTop, lBot });
+        }
+    }
+
+    let visible = false;
+    // many tiles land at once: throttle the clicks into a soft clatter
+    let lastClick = 0;
+    const click = () => {
+        if (!visible || document.hidden) return;
+        const now = performance.now();
+        if (now - lastClick < 28) return;
+        lastClick = now;
+        window.siteSound?.play('flap');
+    };
+
+    const flipOnce = async (t, next, dur) => {
+        face(t.sTop.span, next);
+        face(t.lTop.span, t.cur);
+        face(t.lBot.span, next);
+        await t.lTop.el.animate(
+            [{ transform: 'rotateX(0deg)', filter: 'brightness(1)' }, { transform: 'rotateX(-90deg)', filter: 'brightness(.55)' }],
+            { duration: dur * 0.5, easing: 'cubic-bezier(.55, 0, 1, .45)', fill: 'forwards' },
+        ).finished;
+        await t.lBot.el.animate(
+            [{ transform: 'rotateX(90deg)', filter: 'brightness(1.5)' }, { transform: 'rotateX(0deg)', filter: 'brightness(1)' }],
+            { duration: dur * 0.5, easing: 'cubic-bezier(0, .55, .45, 1)', fill: 'forwards' },
+        ).finished;
+        click();
+        face(t.sBot.span, next);
+        face(t.lTop.span, next);
+        t.lTop.el.getAnimations().forEach((a) => a.cancel());
+        t.lBot.el.getAnimations().forEach((a) => a.cancel());
+        t.cur = next;
+    };
+
+    const wait = (ms) => new Promise((res) => setTimeout(res, ms));
+    const spin = async (t, target, delay) => {
+        if (t.cur === target) return;
+        await wait(delay);
+        const steps = 3 + Math.floor(Math.random() * 5);
+        for (let i = 0; i < steps; i++) {
+            let ch;
+            do { ch = CHARS[(Math.random() * CHARS.length) | 0]; } while (ch === target || ch === t.cur);
+            await flipOnce(t, ch, 84);
+        }
+        await flipOnce(t, target, 150);
+    };
+
+    const textFor = (screen) => tiles.map((t) => ((screen[t.r] || '').padEnd(cols).slice(0, cols))[t.c].toUpperCase());
+    const show = (i) => {
+        const chars = textFor(screens[i]);
+        if (reduceMotion) {
+            tiles.forEach((t, k) => { [t.sTop, t.sBot, t.lTop, t.lBot].forEach((h) => face(h.span, chars[k])); t.cur = chars[k]; });
+            return Promise.resolve();
+        }
+        return Promise.all(tiles.map((t, k) => spin(t, chars[k], t.c * 55 + t.r * 140)));
+    };
+
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.4 }).observe(board);
+    let idx = 0;
+    const waitVisible = async () => { while (!visible || document.hidden) await wait(250); };
+    (async () => {
+        await waitVisible();            // first flip happens when the footer comes into view
+        await show(idx);
+        if (reduceMotion || screens.length < 2) return;
+        for (;;) {
+            await wait(idx === 0 ? 5200 : 3400);
+            await waitVisible();
+            idx = (idx + 1) % screens.length;
+            await show(idx);
+        }
+    })();
+};
+$$('[data-flap]').forEach(initFlapboard);
+
 /*==================== LOAD MORE (earlier work, certificates) ====================*/
 const setupLoadMore = (grid, btn, itemSel, scrollTarget) => {
     if (!grid || !btn) return;
