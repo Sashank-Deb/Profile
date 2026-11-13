@@ -8,10 +8,21 @@
     <meta name="description" content="Sashank Deb is a senior software engineer in Bengaluru who sits at the intersection of product engineering and technical leadership. React, Next.js, TypeScript.">
     <meta property="og:title" content="Sashank Deb · Senior Software Engineer">
     <meta property="og:description" content="Product engineering and technical leadership. React, Next.js, TypeScript, auth and web performance.">
-    <meta property="og:image" content="https://sashank-deb.github.io/Profile/assets/img/headshot.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sashank-deb.github.io/Profile/">
+    <meta property="og:site_name" content="Sashank Deb">
+    <meta property="og:image" content="https://sashank-deb.github.io/Profile/assets/img/og-banner.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Hi, I'm Sashank. Senior Software Engineer, Bengaluru. Product engineering and technical leadership.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sashank Deb · Senior Software Engineer">
+    <meta name="twitter:description" content="Product engineering and technical leadership. React, Next.js, TypeScript, auth and web performance.">
+    <meta name="twitter:image" content="https://sashank-deb.github.io/Profile/assets/img/og-banner.jpg">
     <meta name="theme-color" content="#161415">
     <link rel="icon" href="assets/img/Vector.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="assets/img/headshot.png" type="image/png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/img/headshot.webp" type="image/webp" fetchpriority="high">
 
     <script>
         document.documentElement.classList.add('js');
@@ -34,10 +45,24 @@
                 var resumed = (nav && (nav.type === 'reload' || nav.type === 'back_forward')) || Boolean(location.hash);
                 var mode = replay || (!seen && !location.hash) ? 'play' : (reduced || resumed ? 'none' : 'skip');
                 d.setAttribute('data-intro', mode);
-                if (mode === 'play') setTimeout(function () { if (!window.__opPlaying) d.removeAttribute('data-intro'); }, 2500);
+                if (mode === 'play') {
+                    // Safety net only for when main.js never runs: wait for the full page load first,
+                    // so a slow network can't drop the curtain early and flash the page.
+                    window.addEventListener('load', function () {
+                        setTimeout(function () { if (!window.__opClaimed) d.removeAttribute('data-intro'); }, 1500);
+                    });
+                }
             } catch (e) { d.removeAttribute('data-intro'); }
         })();
     </script>
+
+    <style>
+        /* Critical intro styles: cover the page from the first paint, before any stylesheet arrives */
+        html[data-intro="play"] { background: #1C1A1B; }
+        html[data-intro="play"] body { overflow: hidden; }
+        html[data-intro="play"]:not(.op-covering) body > :not(.op) { visibility: hidden; }
+        html[data-intro="play"] .op { display: block !important; position: fixed; inset: 0; z-index: 300; background: #1C1A1B; }
+    </style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,7 +124,7 @@
 
                 <a class="pill pill--nav" href="mailto:sashankdebrgu7@gmail.com?subject=Hi%20Sashank" aria-label="Email Sashank">
                     <span class="pill__faces" aria-hidden="true">
-                        <img class="pill__avatar" src="assets/img/headshot.png" alt="" width="36" height="36">
+                        <img class="pill__avatar" src="assets/img/headshot.webp" alt="" width="36" height="36">
                         <span class="pill__gmail">
                             <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M7 39h7V22L4 14.5V36a3 3 0 0 0 3 3z"/><path fill="#34A853" d="M34 39h7a3 3 0 0 0 3-3V14.5L34 22z"/><path fill="#FBBC04" d="M34 12v10l10-7.5v-3c0-3.7-4.2-5.8-7.2-3.6z"/><path fill="#EA4335" d="M14 22V12l10 7.5L34 12v10l-10 7.5z"/><path fill="#C5221F" d="M4 11.5v3L14 22V12l-2.8-2.1C8.2 7.7 4 9.8 4 11.5z"/></svg>
                         </span>
@@ -151,7 +176,7 @@
                     <span class="portrait__blob portrait__blob--back" aria-hidden="true"></span>
                     <span class="portrait__blob portrait__blob--ring" aria-hidden="true"></span>
                     <div class="portrait__frame">
-                        <img src="assets/img/headshot.png" alt="Sashank Deb" width="1172" height="1395" fetchpriority="high" decoding="async">
+                        <img src="assets/img/headshot.webp" alt="Sashank Deb" width="1172" height="1395" fetchpriority="high" decoding="async">
                     </div>
                     <span class="portrait__dot portrait__dot--a" aria-hidden="true"></span>
                     <span class="portrait__dot portrait__dot--b" aria-hidden="true"></span>
@@ -880,7 +905,7 @@
                 <div class="cta__actions" data-reveal>
                     <a class="pill pill--lg" href="mailto:sashankdebrgu7@gmail.com?subject=Let%27s%20work%20together" aria-label="Email Sashank">
                         <span class="pill__faces" aria-hidden="true">
-                            <img class="pill__avatar" src="assets/img/headshot.png" alt="" width="44" height="44">
+                            <img class="pill__avatar" src="assets/img/headshot.webp" alt="" width="44" height="44">
                             <span class="pill__gmail">
                                 <svg viewBox="0 0 48 48"><path fill="#4285F4" d="M7 39h7V22L4 14.5V36a3 3 0 0 0 3 3z"/><path fill="#34A853" d="M34 39h7a3 3 0 0 0 3-3V14.5L34 22z"/><path fill="#FBBC04" d="M34 12v10l10-7.5v-3c0-3.7-4.2-5.8-7.2-3.6z"/><path fill="#EA4335" d="M14 22V12l10 7.5L34 12v10l-10 7.5z"/><path fill="#C5221F" d="M4 11.5v3L14 22V12l-2.8-2.1C8.2 7.7 4 9.8 4 11.5z"/></svg>
                             </span>
@@ -913,7 +938,7 @@
                 <p class="footer__subtitle">
                     <span class="sr-only">Senior Software Engineer</span>
                     <span class="flapboard flapboard--footer" data-flap aria-hidden="true" data-cols="8"
-                          data-lines="SENIOR|SOFTWARE|ENGINEER;I BUILD|PRODUCTS.;ONE|PIXEL AT|A TIME"></span>
+                          data-lines="SENIOR|SOFTWARE|ENGINEER;I BUILD|STUFF ON|THE WEB;ONE|PIXEL AT|A TIME"></span>
                 </p>
             </div>
 
