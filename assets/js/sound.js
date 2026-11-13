@@ -1,6 +1,6 @@
 /*==================== UI SOUNDS ====================
    Tiny synthesised sounds (Web Audio, no audio files).
-   - window.siteSound.play(name)   name: tick | soft | toggle-on | toggle-off
+   - window.siteSound.play(name)   name: tick | soft | flap | toggle-on | toggle-off
    - A sound on/off button (#sound-button) persists the choice in localStorage.
    - Subtle click sounds are attached to buttons and links across the site.
 =====================================================*/
@@ -71,6 +71,12 @@
             noise(c, { dur: 0.035, vol: 0.02, f0: 700, f1: 250 });
         },
         'toggle-on': (c) => { tone(c, { from: 620, dur: 0.06, vol: 0.04 }); tone(c, { from: 930, dur: 0.08, vol: 0.04, at: 0.06 }); },
+        // one split-flap leaf landing: a tiny, dry mechanical click with a little body
+        flap: (c) => {
+            const p = 0.85 + Math.random() * 0.3;
+            noise(c, { dur: 0.016, vol: 0.05, filter: 'bandpass', f0: 2600 * p, f1: 1500 * p, q: 1.4 });
+            tone(c, { type: 'sine', from: 210 * p, to: 140 * p, dur: 0.025, vol: 0.018 });
+        },
         'toggle-off': (c) => { tone(c, { from: 930, dur: 0.06, vol: 0.04 }); tone(c, { from: 620, dur: 0.08, vol: 0.04, at: 0.06 }); },
     };
 
