@@ -330,6 +330,24 @@ const initFlapboard = (board) => {
 };
 $$('[data-flap]').forEach(initFlapboard);
 
+/*==================== HEADER CONTACT PILL: PERIODIC PEEK ====================*/
+// Every 2s the header pill briefly shows its hover state (Gmail icon slides in) with a subtle buzz.
+(() => {
+    const pill = $('.pill--nav');
+    if (!pill || reduceMotion) return;
+    let hovering = false;
+    pill.addEventListener('pointerenter', () => { hovering = true; pill.classList.remove('is-peek'); });
+    pill.addEventListener('pointerleave', () => { hovering = false; });
+    pill.addEventListener('focus', () => { hovering = true; pill.classList.remove('is-peek'); });
+    pill.addEventListener('blur', () => { hovering = false; });
+    const peek = () => {
+        if (hovering || document.hidden || root.getAttribute('data-intro') === 'play' || pill.offsetParent === null) return;
+        pill.classList.add('is-peek');
+        setTimeout(() => pill.classList.remove('is-peek'), 1100);
+    };
+    setTimeout(() => { peek(); setInterval(peek, 2000); }, 1500);
+})();
+
 /*==================== LOAD MORE (earlier work, certificates) ====================*/
 const setupLoadMore = (grid, btn, itemSel, scrollTarget) => {
     if (!grid || !btn) return;
