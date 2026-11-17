@@ -223,7 +223,28 @@ html.dark-theme .theme-icon--moon { display: none; }
 .pill:hover .pill__avatar, .pill:focus-visible .pill__avatar { transform: rotate(-6deg); }
 .pill:hover .pill__arrow, .pill:focus-visible .pill__arrow { transform: translateX(4px); }
 
-.pill--nav { --h: 44px; font-size: .95rem; padding-right: 18px; }
+.pill--nav { --h: 44px; font-size: .95rem; padding-right: 18px; animation: pill-buzz 2s ease-in-out 1.5s infinite; }
+/* hover/focus takes over from the buzz */
+.pill--nav:hover, .pill--nav:focus-visible { animation: none; }
+/* a short, subtle buzz once every 2 seconds */
+@keyframes pill-buzz {
+    0%, 82%, 100% { transform: none; }
+    85% { transform: translateX(-1.5px) rotate(-2deg); }
+    88% { transform: translateX(1.5px) rotate(2deg); }
+    91% { transform: translateX(-1px) rotate(-1.2deg); }
+    94% { transform: translateX(1px) rotate(1deg); }
+    97% { transform: translateX(-.5px) rotate(-.4deg); }
+}
+/* dark mode: invert the header pill so it stands out on the dark header */
+html.dark-theme .pill--nav {
+    background: #F1ECE6;
+    color: #1C1A1B;
+    box-shadow: 0 10px 26px -12px rgba(0, 0, 0, .7), inset 0 0 0 1px rgba(0, 0, 0, .06);
+}
+html.dark-theme .pill--nav:hover, html.dark-theme .pill--nav:focus-visible {
+    box-shadow: 0 16px 32px -14px rgba(0, 0, 0, .8), inset 0 0 0 1px rgba(0, 0, 0, .08);
+}
+html.dark-theme .pill--nav .pill__gmail { box-shadow: 0 0 0 3px #F1ECE6; }
 .pill--lg { --h: 62px; font-size: 1.15rem; padding-right: 26px; gap: 14px; }
 
 /*==================== NAME INTRO ====================*/
