@@ -330,6 +330,34 @@ const initFlapboard = (board) => {
 };
 $$('[data-flap]').forEach(initFlapboard);
 
+/*==================== HEADER CONTACT PILL: PERIODIC PEEK ====================*/
+// Every 5s the header pill briefly shows its hover state (Gmail icon slides in) with a subtle buzz.
+// Once the visitor really hovers, focuses or clicks it, the peeking stops for the rest of the session.
+(() => {
+    const pill = $('.pill--nav');
+    const KEY = 'pill-peek-off';
+    let off = false;
+    try { off = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+    if (!pill || reduceMotion || off) return;
+
+    let timer = 0;
+    const stop = () => {
+        clearInterval(timer);
+        clearTimeout(timer);
+        pill.classList.remove('is-peek');
+        try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+        ['pointerenter', 'focus', 'click'].forEach((t) => pill.removeEventListener(t, stop));
+    };
+    ['pointerenter', 'focus', 'click'].forEach((t) => pill.addEventListener(t, stop));
+
+    const peek = () => {
+        if (document.hidden || root.getAttribute('data-intro') === 'play' || pill.offsetParent === null) return;
+        pill.classList.add('is-peek');
+        setTimeout(() => pill.classList.remove('is-peek'), 1100);
+    };
+    timer = setTimeout(() => { peek(); timer = setInterval(peek, 5000); }, 2000);
+})();
+
 /*==================== LOAD MORE (earlier work, certificates) ====================*/
 const setupLoadMore = (grid, btn, itemSel, scrollTarget) => {
     if (!grid || !btn) return;

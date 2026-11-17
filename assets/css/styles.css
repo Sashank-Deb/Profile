@@ -224,6 +224,28 @@ html.dark-theme .theme-icon--moon { display: none; }
 .pill:hover .pill__arrow, .pill:focus-visible .pill__arrow { transform: translateX(4px); }
 
 .pill--nav { --h: 44px; font-size: .95rem; padding-right: 18px; }
+/* every 2s main.js adds .is-peek: the pill opens its hover state (Gmail slides in) and buzzes */
+.pill--nav.is-peek { margin-left: 0; animation: pill-buzz .55s ease-in-out .15s; }
+.pill--nav.is-peek .pill__gmail { width: var(--av); margin-left: calc(var(--av) * -.3); opacity: 1; transform: none; }
+.pill--nav.is-peek .pill__avatar { transform: rotate(-6deg); }
+@keyframes pill-buzz {
+    0%, 100% { transform: none; }
+    15% { transform: translateX(-1.5px) rotate(-2deg); }
+    30% { transform: translateX(1.5px) rotate(2deg); }
+    45% { transform: translateX(-1px) rotate(-1.2deg); }
+    60% { transform: translateX(1px) rotate(1deg); }
+    75% { transform: translateX(-.5px) rotate(-.4deg); }
+}
+/* dark mode: invert the header pill so it stands out on the dark header */
+html.dark-theme .pill--nav {
+    background: #F1ECE6;
+    color: #1C1A1B;
+    box-shadow: 0 10px 26px -12px rgba(0, 0, 0, .7), inset 0 0 0 1px rgba(0, 0, 0, .06);
+}
+html.dark-theme .pill--nav:hover, html.dark-theme .pill--nav:focus-visible {
+    box-shadow: 0 16px 32px -14px rgba(0, 0, 0, .8), inset 0 0 0 1px rgba(0, 0, 0, .08);
+}
+html.dark-theme .pill--nav .pill__gmail { box-shadow: 0 0 0 3px #F1ECE6; }
 .pill--lg { --h: 62px; font-size: 1.15rem; padding-right: 26px; gap: 14px; }
 
 /*==================== NAME INTRO ====================*/
